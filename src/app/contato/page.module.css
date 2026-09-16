@@ -1,0 +1,269 @@
+.page {
+  min-height: 100vh;
+
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.contact {
+  padding:
+    clamp(80px, 9vw, 140px)
+    0
+    clamp(90px, 10vw, 150px);
+}
+
+.container {
+  width: min(
+    calc(100% - (var(--container-padding) * 2)),
+    var(--container-width)
+  );
+
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(360px, 0.72fr);
+
+  grid-template-areas:
+    "intro details"
+    "signature signature";
+
+  align-items: start;
+
+  column-gap: clamp(60px, 9vw, 140px);
+  row-gap: clamp(80px, 10vw, 140px);
+}
+
+/* ========================================
+   INTRO
+======================================== */
+
+.intro {
+  grid-area: intro;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: var(--color-primary);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(5rem, 8vw, 8.5rem);
+  font-weight: 400;
+
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+}
+
+.title em {
+  color: var(--color-primary);
+
+  font-weight: 400;
+}
+
+.description {
+  margin-top: 36px;
+
+  color: var(--color-muted);
+
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   CONTATOS
+======================================== */
+
+.details {
+  grid-area: details;
+
+  border-top: 1px solid var(--color-border);
+}
+
+.contactItem {
+  min-height: 112px;
+
+  padding: 24px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  transition:
+    color 180ms ease,
+    padding-left 180ms ease;
+}
+
+a.contactItem:hover {
+  padding-left: 8px;
+
+  color: var(--color-primary);
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--color-primary);
+
+  font-size: 0.58rem;
+  font-weight: 600;
+
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.value {
+  overflow-wrap: anywhere;
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-weight: 400;
+
+  line-height: 1.1;
+}
+
+.arrow {
+  flex-shrink: 0;
+
+  font-size: 1.1rem;
+
+  transition: transform 180ms ease;
+}
+
+a.contactItem:hover .arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ========================================
+   ASSINATURA
+======================================== */
+
+.signature {
+  grid-area: signature;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 30px;
+}
+
+.line {
+  width: min(240px, 20vw);
+  height: 1px;
+
+  background: var(--color-primary);
+}
+
+.signature p {
+  color: var(--color-detail);
+
+  font-family: var(--font-script), cursive;
+  font-size: clamp(3rem, 5vw, 5.4rem);
+  font-weight: 400;
+
+  line-height: 0.7;
+
+  transform: rotate(-4deg);
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "intro"
+      "details"
+      "signature";
+
+    row-gap: 58px;
+  }
+
+  .details {
+    width: min(100%, 680px);
+  }
+
+  .signature {
+    justify-content: flex-start;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .contact {
+    padding:
+      55px
+      0
+      80px;
+  }
+
+  .container {
+    row-gap: 48px;
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 0.6rem;
+  }
+
+  .title {
+    font-size: clamp(4.2rem, 20vw, 6.2rem);
+
+    line-height: 0.79;
+  }
+
+  .description {
+    margin-top: 28px;
+
+    font-size: 0.94rem;
+  }
+
+  .contactItem {
+    min-height: 96px;
+
+    padding: 20px 0;
+  }
+
+  .value {
+    font-size: 1.45rem;
+  }
+
+  .signature {
+    align-items: flex-end;
+
+    gap: 18px;
+  }
+
+  .line {
+    width: 48px;
+  }
+
+  .signature p {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+  }
+}

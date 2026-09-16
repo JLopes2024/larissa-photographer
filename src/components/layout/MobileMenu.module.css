@@ -1,0 +1,448 @@
+/* ========================================
+   OVERLAY
+======================================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 999;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow-y: auto;
+
+  background: var(--color-dark);
+  color: #ffffff;
+
+  animation:
+    menuOpen 360ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.closing {
+  pointer-events: none;
+
+  animation:
+    menuClose 280ms
+    cubic-bezier(0.4, 0, 1, 1)
+    both;
+}
+
+@keyframes menuOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuClose {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.inner {
+  width: min(
+    calc(100% - (var(--container-padding) * 2)),
+    var(--container-width)
+  );
+
+  min-height: 100dvh;
+
+  margin-inline: auto;
+
+  padding:
+    26px
+    0
+    32px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   TOPO
+======================================== */
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+
+  color: #ffffff;
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 2rem;
+
+  line-height: 0.8;
+}
+
+.brand span {
+  margin-top: 5px;
+  margin-left: 18px;
+
+  color: var(--color-detail);
+
+  font-family: var(--font-script), cursive;
+  font-size: 1.05rem;
+
+  transform: rotate(-4deg);
+}
+
+.closeButton {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.closeButton span {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 25px;
+  height: 1px;
+
+  background: #ffffff;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.closeButton span:first-child {
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+}
+
+.closeButton span:last-child {
+  transform:
+    translate(-50%, -50%)
+    rotate(-45deg);
+}
+
+.closeButton:hover span {
+  background: var(--color-detail);
+}
+
+.closeButton:hover span:first-child {
+  transform:
+    translate(-50%, -50%)
+    rotate(40deg);
+}
+
+.closeButton:hover span:last-child {
+  transform:
+    translate(-50%, -50%)
+    rotate(-40deg);
+}
+
+/* ========================================
+   NAVEGAÇÃO
+======================================== */
+
+.navigation {
+  margin:
+    auto
+    0;
+
+  padding:
+    70px
+    0
+    60px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.navLink {
+  position: relative;
+
+  padding:
+    13px
+    0;
+
+  display: flex;
+  align-items: baseline;
+
+  gap: 20px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(3.1rem, 13vw, 5.2rem);
+  font-weight: 400;
+
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+
+  animation:
+    navItemEnter 420ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.navLink:nth-child(1) {
+  animation-delay: 50ms;
+}
+
+.navLink:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.navLink:nth-child(3) {
+  animation-delay: 110ms;
+}
+
+.navLink:nth-child(4) {
+  animation-delay: 140ms;
+}
+
+.navLink:nth-child(5) {
+  animation-delay: 170ms;
+}
+
+@keyframes navItemEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.number {
+  min-width: 22px;
+
+  color: var(--color-detail);
+
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.52rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+}
+
+.navLink:hover {
+  color: #ffffff;
+
+  transform: translateX(6px);
+}
+
+.active {
+  color: #ffffff;
+
+  transform: translateX(8px);
+}
+
+.active::after {
+  content: "";
+
+  width: 38px;
+  height: 1px;
+
+  margin-left: 4px;
+
+  background: var(--color-detail);
+}
+
+/* não deixa a animação dos links
+   competir com a animação de saída */
+.closing .navLink {
+  animation: none;
+}
+
+/* ========================================
+   PARTE INFERIOR
+======================================== */
+
+.bottom {
+  padding-top: 24px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  animation:
+    bottomEnter 500ms
+    180ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes bottomEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closing .bottom {
+  animation: none;
+}
+
+/* ========================================
+   SOCIAIS
+======================================== */
+
+.socials {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.socials a {
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 0.58rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.socials a:hover {
+  color: var(--color-detail);
+
+  transform: translateX(3px);
+}
+
+/* ========================================
+   FRASE
+======================================== */
+
+.quote {
+  color: var(--color-detail);
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+
+  line-height: 1.25;
+
+  text-align: right;
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 420px) {
+  .inner {
+    padding-top: 22px;
+    padding-bottom: 26px;
+  }
+
+  .navigation {
+    padding:
+      50px
+      0
+      40px;
+  }
+
+  .navLink {
+    padding:
+      10px
+      0;
+
+    font-size: clamp(2.7rem, 12vw, 4rem);
+  }
+
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quote {
+    text-align: left;
+  }
+}
+
+/* ========================================
+   REDUZIR MOVIMENTO
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .closing,
+  .navLink,
+  .bottom {
+    animation: none;
+  }
+
+  .navLink,
+  .closeButton span,
+  .socials a {
+    transition: none;
+  }
+}
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 901px) {
+  .overlay {
+    display: none;
+  }
+}

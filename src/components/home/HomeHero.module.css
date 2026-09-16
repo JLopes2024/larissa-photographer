@@ -1,0 +1,243 @@
+.hero {
+  position: relative;
+
+  width: 100%;
+  height: 100svh;
+  min-height: 620px;
+
+  overflow: hidden;
+
+  background: var(--color-dark);
+  color: #ffffff;
+}
+
+.background {
+  object-fit: cover;
+
+  /*
+    Ajustado pensando na foto vertical:
+    preserva a modelo e deixa área à esquerda para o texto.
+  */
+  object-position: 54% 48%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.4) 24%,
+      rgba(0, 0, 0, 0.12) 52%,
+      rgba(0, 0, 0, 0.03) 75%,
+      rgba(0, 0, 0, 0.14) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.08) 38%,
+      transparent 68%
+    );
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: min(
+    calc(100% - (var(--container-padding) * 2)),
+    var(--container-width)
+  );
+
+  height: 100%;
+
+  margin-inline: auto;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding-bottom: clamp(46px, 6vh, 72px);
+}
+
+.content {
+  width: min(100%, 540px);
+}
+
+.eyebrow {
+  margin-bottom: 22px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 0.64rem;
+  font-weight: 600;
+
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: #ffffff;
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(4.7rem, 6.6vw, 7.2rem);
+  font-weight: 400;
+
+  line-height: 0.76;
+  letter-spacing: -0.045em;
+}
+
+.categories {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px 12px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+}
+
+.categories span {
+  color: var(--color-detail);
+}
+
+.cta {
+  width: 220px;
+
+  margin-top: 34px;
+  padding: 12px 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+
+  color: #ffffff;
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  transition:
+    width 220ms ease,
+    opacity 180ms ease;
+}
+
+.cta:hover {
+  width: 235px;
+  opacity: 0.78;
+}
+
+/* =========================
+   NOTEBOOK / TABLET
+========================= */
+
+@media (max-width: 1100px) {
+  .background {
+    object-position: 56% center;
+  }
+
+  .content {
+    width: min(100%, 480px);
+  }
+
+  .title {
+    font-size: clamp(4.4rem, 8vw, 6.5rem);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .background {
+    /*
+      No mobile conseguimos aproveitar muito melhor
+      a proporção vertical da fotografia.
+    */
+    object-position: 50% center;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.25) 43%,
+        rgba(0, 0, 0, 0.04) 72%
+      );
+  }
+
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 0.56rem;
+    letter-spacing: 0.26em;
+  }
+
+  .title {
+    font-size: clamp(3.8rem, 17vw, 5.4rem);
+
+    line-height: 0.77;
+  }
+
+  .categories {
+    margin-top: 22px;
+
+    gap: 6px 8px;
+
+    font-size: 0.54rem;
+    letter-spacing: 0.16em;
+  }
+
+  .cta {
+    width: 100%;
+
+    margin-top: 26px;
+
+    font-size: 0.58rem;
+  }
+
+  .cta:hover {
+    width: 100%;
+  }
+}
+
+/* =========================
+   CELULARES PEQUENOS
+========================= */
+
+@media (max-width: 390px) {
+  .title {
+    font-size: clamp(3.4rem, 17vw, 4.4rem);
+  }
+
+  .categories {
+    font-size: 0.5rem;
+  }
+}

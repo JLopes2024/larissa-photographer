@@ -1,0 +1,930 @@
+.page {
+  min-height: 100vh;
+
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.container {
+  width: min(
+    calc(100% - (var(--container-padding) * 2)),
+    var(--container-width)
+  );
+
+  margin-inline: auto;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+  padding:
+    clamp(70px, 8vw, 120px)
+    0
+    clamp(80px, 9vw, 130px);
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: var(--color-primary);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.heroHeading {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(280px, 0.45fr);
+
+  align-items: end;
+
+  gap: clamp(40px, 7vw, 100px);
+}
+
+.title {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size: clamp(5rem, 8vw, 8.5rem);
+  font-weight: 400;
+
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+}
+
+.title em {
+  color: var(--color-primary);
+
+  font-weight: 400;
+}
+
+.heroText {
+  max-width: 390px;
+}
+
+.heroText p {
+  color: var(--color-muted);
+
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.heroCta {
+  width: fit-content;
+
+  margin-top: 30px;
+  padding-bottom: 10px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 22px;
+
+  border-bottom:
+    1px solid var(--color-primary);
+
+  font-size: 0.64rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  transition:
+    gap 180ms ease,
+    color 180ms ease;
+}
+
+.heroCta:hover {
+  gap: 30px;
+
+  color: var(--color-primary);
+}
+
+/* ========================================
+   SERVIÇOS
+======================================== */
+
+.servicesSection {
+  padding:
+    clamp(80px, 9vw, 130px)
+    0;
+
+  background: #f0ece6;
+}
+
+.sectionHeading {
+  margin-bottom: 46px;
+
+  display: grid;
+
+  grid-template-columns:
+    0.4fr
+    1fr;
+
+  align-items: start;
+
+  gap: clamp(30px, 6vw, 80px);
+}
+
+.sectionLabel {
+  color: var(--color-primary);
+
+  font-size: 0.64rem;
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.sectionHeading h2 {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size: clamp(3.6rem, 6vw, 6.3rem);
+  font-weight: 400;
+
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+}
+
+.servicesGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  border-top:
+    1px solid var(--color-border);
+
+  border-left:
+    1px solid var(--color-border);
+}
+
+.service {
+  min-height: 260px;
+
+  padding: 26px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-right:
+    1px solid var(--color-border);
+
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+.serviceNumber {
+  color: var(--color-primary);
+
+  font-size: 0.58rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+}
+
+.service h3 {
+  margin-top: auto;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size: 2rem;
+  font-weight: 400;
+
+  line-height: 1.05;
+}
+
+.service p {
+  margin-top: 16px;
+
+  color: var(--color-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ========================================
+   POLAROID
+======================================== */
+
+.polaroidSection {
+  padding:
+    clamp(90px, 10vw, 150px)
+    0;
+
+  background: var(--color-background);
+}
+
+.polaroidSection .container {
+  display: grid;
+
+  grid-template-columns:
+    minmax(320px, 0.82fr)
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: clamp(60px, 9vw, 140px);
+}
+
+/* ========================================
+   FOTO POLAROID
+======================================== */
+
+.polaroidVisual {
+  position: relative;
+
+  width: 100%;
+}
+
+.polaroidImageWrapper {
+  position: relative;
+
+  width: min(100%, 490px);
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #211a18;
+}
+
+/*
+  A foto original tem bastante espaço vazio
+  na parte superior.
+
+  O object-position abaixo preserva mais
+  rosto, câmera e parte inferior da foto.
+*/
+.polaroidImage {
+  object-fit: cover;
+
+  object-position:
+    center
+    67%;
+
+  transition:
+    transform 700ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  Escurecimento muito leve na base
+  para integrar a imagem ao layout.
+*/
+.polaroidImageWrapper::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 58%,
+      rgba(20, 15, 14, 0.08) 78%,
+      rgba(20, 15, 14, 0.2) 100%
+    );
+}
+
+.polaroidVisual:hover .polaroidImage {
+  transform: scale(1.015);
+}
+
+/* ========================================
+   FRASE MANUSCRITA
+======================================== */
+
+.handwritten {
+  position: absolute;
+
+  right: -5%;
+  bottom: 7%;
+
+  z-index: 2;
+
+  color: var(--color-detail);
+
+  font-family:
+    var(--font-script),
+    cursive;
+
+  font-size:
+    clamp(2.8rem, 4vw, 4.7rem);
+
+  font-weight: 400;
+
+  line-height: 0.72;
+
+  text-align: right;
+
+  transform: rotate(-6deg);
+
+  pointer-events: none;
+}
+
+/* ========================================
+   TEXTO POLAROID
+======================================== */
+
+.polaroidContent {
+  max-width: 650px;
+}
+
+.polaroidContent h2 {
+  margin-top: 18px;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(4rem, 6vw, 6.5rem);
+
+  font-weight: 400;
+
+  line-height: 0.84;
+  letter-spacing: -0.04em;
+}
+
+.polaroidContent h2 em {
+  color: var(--color-primary);
+
+  font-weight: 400;
+}
+
+.polaroidLead {
+  max-width: 46ch;
+
+  margin-top: 30px;
+
+  color: var(--color-text);
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.45rem, 2vw, 2rem);
+
+  line-height: 1.25;
+}
+
+.polaroidText {
+  max-width: 52ch;
+
+  margin-top: 28px;
+}
+
+.polaroidText p {
+  color: var(--color-muted);
+
+  font-size: 0.94rem;
+  line-height: 1.8;
+}
+
+.polaroidText p + p {
+  margin-top: 16px;
+}
+
+/* ========================================
+   CTA POLAROID
+======================================== */
+
+.primaryCta {
+  width: fit-content;
+
+  margin-top: 34px;
+
+  padding:
+    15px
+    20px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 26px;
+
+  border:
+    1px solid var(--color-primary);
+
+  color: var(--color-primary);
+
+  font-size: 0.64rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.primaryCta:hover {
+  gap: 34px;
+
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ========================================
+   FAQ
+======================================== */
+
+.faqSection {
+  padding:
+    clamp(90px, 10vw, 150px)
+    0;
+
+  background: #f0ece6;
+}
+
+.faqSection .container {
+  display: grid;
+
+  grid-template-columns:
+    minmax(250px, 0.45fr)
+    minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: clamp(50px, 8vw, 120px);
+}
+
+.faqHeading h2 {
+  margin-top: 18px;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(3.8rem, 5vw, 5.8rem);
+
+  font-weight: 400;
+
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+}
+
+.faqList {
+  border-top:
+    1px solid var(--color-primary);
+}
+
+.faqItem {
+  border-bottom:
+    1px solid var(--color-primary);
+}
+
+.faqItem summary {
+  position: relative;
+
+  padding:
+    22px
+    44px
+    22px
+    0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  list-style: none;
+
+  cursor: pointer;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.35rem, 2vw, 1.8rem);
+
+  line-height: 1.2;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqIcon {
+  position: absolute;
+
+  right: 4px;
+  top: 50%;
+
+  width: 18px;
+  height: 18px;
+
+  transform:
+    translateY(-50%);
+}
+
+.faqIcon::before,
+.faqIcon::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 16px;
+  height: 1px;
+
+  background: var(--color-primary);
+
+  transform:
+    translate(-50%, -50%);
+}
+
+.faqIcon::after {
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+
+  transition:
+    opacity 180ms ease;
+}
+
+.faqItem[open] .faqIcon::after {
+  opacity: 0;
+}
+
+.faqAnswer {
+  max-width: 70ch;
+
+  padding:
+    0
+    40px
+    24px
+    0;
+}
+
+.faqAnswer p {
+  color: var(--color-muted);
+
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   CTA FINAL
+======================================== */
+
+.finalCta {
+  padding:
+    clamp(100px, 12vw, 180px)
+    0;
+
+  background: var(--color-dark);
+  color: #ffffff;
+
+  text-align: center;
+}
+
+.finalCta .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finalCta .sectionLabel {
+  color: var(--color-detail);
+}
+
+.finalCta h2 {
+  max-width: 900px;
+
+  margin-top: 24px;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(4rem, 7vw, 7.5rem);
+
+  font-weight: 400;
+
+  line-height: 0.84;
+  letter-spacing: -0.04em;
+}
+
+.finalCta h2 em {
+  color: var(--color-detail);
+
+  font-weight: 400;
+}
+
+.finalCta p {
+  max-width: 50ch;
+
+  margin-top: 28px;
+
+  color:
+    rgba(255, 255, 255, 0.62);
+
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.finalButton {
+  margin-top: 36px;
+
+  padding:
+    16px
+    22px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 26px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  font-size: 0.64rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.finalButton:hover {
+  gap: 34px;
+
+  background: #ffffff;
+  color: var(--color-dark);
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 950px) {
+  .heroHeading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .heroText {
+    max-width: 500px;
+  }
+
+  .sectionHeading {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .servicesGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .polaroidSection .container {
+    grid-template-columns:
+      minmax(280px, 0.8fr)
+      minmax(0, 1fr);
+
+    gap: 50px;
+  }
+
+  .polaroidImageWrapper {
+    width: 100%;
+  }
+
+  .faqSection .container {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .hero {
+    padding:
+      52px
+      0
+      72px;
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 0.6rem;
+  }
+
+  .title {
+    font-size:
+      clamp(4rem, 18vw, 6rem);
+  }
+
+  /* SERVIÇOS */
+
+  .servicesSection {
+    padding:
+      70px
+      0;
+  }
+
+  .sectionHeading {
+    margin-bottom: 30px;
+  }
+
+  .sectionHeading h2 {
+    font-size:
+      clamp(3.5rem, 14vw, 5.2rem);
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .service {
+    min-height: 210px;
+
+    padding: 22px;
+  }
+
+  /* POLAROID */
+
+  .polaroidSection {
+    padding:
+      80px
+      0;
+  }
+
+  .polaroidSection .container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 54px;
+  }
+
+  .polaroidVisual {
+    width: 100%;
+  }
+
+  .polaroidImageWrapper {
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+  }
+
+  /*
+    No mobile preservamos ainda mais
+    a parte inferior da foto.
+  */
+  .polaroidImage {
+    object-position:
+      center
+      70%;
+  }
+
+  .handwritten {
+    right: 2%;
+    bottom: 5%;
+
+    font-size:
+      clamp(2.8rem, 13vw, 4rem);
+  }
+
+  .polaroidContent {
+    width: 100%;
+    max-width: none;
+  }
+
+  .polaroidContent h2 {
+    font-size:
+      clamp(3.8rem, 15vw, 5.5rem);
+  }
+
+  .primaryCta {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  /* FAQ */
+
+  .faqSection {
+    padding:
+      75px
+      0;
+  }
+
+  .faqHeading h2 {
+    font-size:
+      clamp(3.6rem, 14vw, 5rem);
+  }
+
+  .faqItem summary {
+    padding:
+      20px
+      38px
+      20px
+      0;
+
+    font-size: 1.35rem;
+  }
+
+  /* CTA FINAL */
+
+  .finalCta {
+    padding:
+      90px
+      0;
+  }
+
+  .finalCta h2 {
+    font-size:
+      clamp(3.8rem, 15vw, 5.5rem);
+  }
+
+  .finalButton {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 390px) {
+  .polaroidImageWrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .polaroidImage {
+    object-position:
+      center
+      72%;
+  }
+
+  .handwritten {
+    font-size: 2.8rem;
+  }
+}
+
+/* ========================================
+   REDUZIR MOVIMENTO
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroidImage,
+  .primaryCta,
+  .heroCta,
+  .finalButton,
+  .faqIcon::after {
+    transition: none;
+  }
+
+  .polaroidVisual:hover .polaroidImage {
+    transform: none;
+  }
+}

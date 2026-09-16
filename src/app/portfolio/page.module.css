@@ -1,0 +1,374 @@
+.page {
+  min-height: 100vh;
+
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.container {
+  width: min(
+    calc(100% - (var(--container-padding) * 2)),
+    var(--container-width)
+  );
+
+  margin-inline: auto;
+}
+
+/* ========================================
+   ABERTURA DO PORTFÓLIO
+======================================== */
+
+.intro {
+  padding:
+    80px
+    0
+    clamp(90px, 9vw, 130px);
+}
+
+.intro .container {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(340px, 0.55fr);
+
+  grid-template-areas:
+    "eyebrow featured"
+    "heading featured";
+
+  align-items: start;
+
+  column-gap: clamp(60px, 9vw, 130px);
+}
+
+/* ========================================
+   LABEL
+======================================== */
+
+.eyebrow {
+  grid-area: eyebrow;
+
+  display: block;
+
+  margin-bottom: 28px;
+
+  color: var(--color-primary);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   TÍTULO E TEXTO
+======================================== */
+
+.heading {
+  grid-area: heading;
+
+  display: block;
+}
+
+.title {
+  max-width: 700px;
+
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(4.8rem, 7vw, 7.6rem);
+  font-weight: 400;
+
+  line-height: 0.79;
+  letter-spacing: -0.05em;
+}
+
+.headingText {
+  max-width: 390px;
+
+  margin-top: 36px;
+}
+
+.headingText p {
+  color: var(--color-muted);
+
+  font-size: 0.96rem;
+  line-height: 1.8;
+}
+
+.line {
+  display: block;
+
+  width: 50px;
+  height: 1px;
+
+  margin-top: 28px;
+
+  background: var(--color-primary);
+}
+
+/* ========================================
+   FOTO DE DESTAQUE
+======================================== */
+
+.featured {
+  grid-area: featured;
+
+  position: relative;
+
+  width: min(100%, 440px);
+  aspect-ratio: 4 / 5;
+
+  justify-self: end;
+
+  overflow: hidden;
+
+  background: #e8e3dd;
+}
+
+.featuredImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.featured::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.32) 0%,
+      rgba(0, 0, 0, 0.06) 32%,
+      transparent 50%
+    );
+
+  pointer-events: none;
+}
+
+/* ========================================
+   FRASE MANUSCRITA
+======================================== */
+
+.handwritten {
+  position: absolute;
+  z-index: 2;
+
+  right: 24px;
+  bottom: 28px;
+
+  color: #ffffff;
+
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2.8rem, 4vw, 4.4rem);
+  font-weight: 400;
+
+  line-height: 0.7;
+
+  text-align: right;
+
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.28);
+
+  transform: rotate(-6deg);
+}
+
+/* ========================================
+   SEÇÃO DA GALERIA
+======================================== */
+
+.gallerySection {
+  padding:
+    clamp(80px, 8vw, 120px)
+    0
+    clamp(100px, 10vw, 150px);
+
+  border-top: 1px solid var(--color-border);
+}
+
+.galleryHeading {
+  margin-bottom: 38px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.galleryHeading > span {
+  color: var(--color-primary);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.galleryHeading p {
+  max-width: 35ch;
+
+  color: var(--color-muted);
+
+  font-size: 0.92rem;
+  line-height: 1.7;
+
+  text-align: right;
+}
+
+/* ========================================
+   NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .intro .container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(320px, 0.7fr);
+
+    column-gap: 60px;
+  }
+
+  .title {
+    font-size: clamp(4.5rem, 7.5vw, 6.6rem);
+  }
+
+  .featured {
+    width: min(100%, 400px);
+  }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .intro {
+    padding-top: 65px;
+  }
+
+  .intro .container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(280px, 0.75fr);
+
+    column-gap: 42px;
+  }
+
+  .title {
+    font-size: clamp(4rem, 8vw, 5.8rem);
+  }
+
+  .headingText {
+    margin-top: 30px;
+  }
+
+  .featured {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .intro {
+    padding:
+      50px
+      0
+      72px;
+  }
+
+  .intro .container {
+    display: block;
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 0.6rem;
+    letter-spacing: 0.26em;
+  }
+
+  .title {
+    font-size: clamp(4rem, 19vw, 6rem);
+
+    line-height: 0.79;
+  }
+
+  .headingText {
+    max-width: 100%;
+
+    margin-top: 26px;
+  }
+
+  .headingText p {
+    max-width: 34ch;
+
+    font-size: 0.92rem;
+  }
+
+  .line {
+    width: 46px;
+
+    margin-top: 22px;
+  }
+
+  .featured {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+
+    margin-top: 42px;
+  }
+
+  .handwritten {
+    right: 18px;
+    bottom: 20px;
+
+    font-size: clamp(2.8rem, 14vw, 4rem);
+  }
+
+  .gallerySection {
+    padding:
+      68px
+      0
+      90px;
+  }
+
+  .galleryHeading {
+    margin-bottom: 28px;
+
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .galleryHeading > span {
+    font-size: 0.6rem;
+  }
+
+  .galleryHeading p {
+    max-width: 34ch;
+
+    font-size: 0.9rem;
+
+    text-align: left;
+  }
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 390px) {
+  .title {
+    font-size: clamp(3.7rem, 18vw, 5rem);
+  }
+
+  .handwritten {
+    font-size: 2.8rem;
+  }
+}

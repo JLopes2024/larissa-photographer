@@ -1,0 +1,317 @@
+.wrapper {
+  width: 100%;
+}
+
+/* ========================================
+   FILTROS
+======================================== */
+
+.filters {
+  width: 100%;
+
+  margin-bottom: 46px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px 34px;
+
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+.filterButton {
+  position: relative;
+
+  flex-shrink: 0;
+
+  padding:
+    14px
+    0
+    17px;
+
+  border: 0;
+
+  background: transparent;
+  color: var(--color-muted);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease;
+}
+
+.filterButton::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-primary);
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition:
+    transform 180ms ease;
+}
+
+.filterButton:hover {
+  color: var(--color-primary);
+}
+
+.active {
+  color: var(--color-primary);
+}
+
+.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ========================================
+   MASONRY
+======================================== */
+
+.grid {
+  columns: 3;
+  column-gap: 14px;
+}
+
+.item {
+  width: 100%;
+
+  margin:
+    0
+    0
+    14px;
+
+  display: inline-block;
+
+  break-inside: avoid;
+  page-break-inside: avoid;
+
+  vertical-align: top;
+}
+
+/* ========================================
+   IMAGEM
+======================================== */
+
+.imageWrapper {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #e7e3de;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  transition:
+    transform 500ms
+    cubic-bezier(0.22, 1, 0.36, 1),
+    filter 500ms ease;
+}
+
+.item:hover .image {
+  transform: scale(1.018);
+}
+
+/* ========================================
+   ESTADO VAZIO
+======================================== */
+
+.empty {
+  min-height: 260px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-top:
+    1px solid var(--color-border);
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+.empty p {
+  color: var(--color-muted);
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size: 1.5rem;
+
+  text-align: center;
+}
+
+/* ========================================
+   VER MAIS
+======================================== */
+
+.loadMoreWrapper {
+  margin-top: 58px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.loadMore {
+  min-width: 260px;
+
+  padding:
+    16px
+    4px
+    14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  border: 0;
+  border-bottom:
+    1px solid var(--color-primary);
+
+  background: transparent;
+  color: var(--color-text);
+
+  font-size: 0.66rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    min-width 220ms ease;
+}
+
+.loadMore:hover {
+  min-width: 285px;
+
+  color: var(--color-primary);
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+  .grid {
+    columns: 2;
+    column-gap: 12px;
+  }
+
+  .item {
+    margin-bottom: 12px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .filters {
+    margin-bottom: 30px;
+
+    flex-wrap: nowrap;
+
+    gap: 4px 20px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+
+    overscroll-behavior-inline: contain;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filterButton {
+    padding-bottom: 14px;
+
+    font-size: 0.63rem;
+    letter-spacing: 0.14em;
+  }
+
+  .grid {
+    columns: 2;
+    column-gap: 7px;
+  }
+
+  .item {
+    margin-bottom: 7px;
+  }
+
+  .loadMoreWrapper {
+    margin-top: 40px;
+  }
+
+  .loadMore {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .loadMore:hover {
+    min-width: 0;
+  }
+}
+
+/* ========================================
+   CELULARES MUITO PEQUENOS
+======================================== */
+
+@media (max-width: 360px) {
+  .grid {
+    column-gap: 5px;
+  }
+
+  .item {
+    margin-bottom: 5px;
+  }
+}
+
+/* ========================================
+   REDUZIR MOVIMENTO
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .loadMore,
+  .filterButton::after {
+    transition: none;
+  }
+
+  .item:hover .image {
+    transform: none;
+  }
+}
