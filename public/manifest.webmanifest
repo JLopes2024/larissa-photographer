@@ -1,0 +1,17 @@
+{
+  "name": "Larissa Photographer",
+  "short_name": "Larissa",
+  "description": "Fotografia sensível e autoral em São Paulo para ensaios, eventos, celebrações e posicionamento profissional.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F4F0",
+  "theme_color": "#9A5842",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/images/brand/logo-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

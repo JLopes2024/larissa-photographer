@@ -169,8 +169,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body
+<html
+  lang="pt-BR"
+  data-scroll-behavior="smooth">    
+  <body
         className={`${inter.variable} ${cormorant.variable} ${allura.variable}`}
       >
         <a
