@@ -1,6 +1,5 @@
 export type PortfolioCategory =
   | "ensaios"
-  | "familias"
   | "profissional"
   | "religiosos";
 
@@ -9,7 +8,6 @@ export type PortfolioCollection =
   | "ar-livre"
   | "autoral"
   | "estudio"
-  | "aniversario-infantil"
   | "profissional"
   | "batizado"
   | "casamento"
@@ -39,10 +37,6 @@ export const portfolioCategories = [
     value: "ensaios",
   },
   {
-    label: "Famílias",
-    value: "familias",
-  },
-  {
     label: "Profissional",
     value: "profissional",
   },
@@ -52,7 +46,56 @@ export const portfolioCategories = [
   },
 ] as const;
 
+export const portfolioCollections: Partial<
+  Record<
+    PortfolioCategory,
+    readonly {
+      label: string;
+      value: PortfolioCollection;
+    }[]
+  >
+> = {
+  ensaios: [
+    {
+      label: "Aniversário",
+      value: "aniversario",
+    },
+    {
+      label: "Ar Livre",
+      value: "ar-livre",
+    },
+    {
+      label: "Autoral",
+      value: "autoral",
+    },
+    {
+      label: "Estúdio",
+      value: "estudio",
+    },
+  ],
+
+  religiosos: [
+    {
+      label: "Batizado",
+      value: "batizado",
+    },
+    {
+      label: "Casamento",
+      value: "casamento",
+    },
+    {
+      label: "Eucaristia",
+      value: "eucaristia",
+    },
+  ],
+};
+
 export const portfolioItems: PortfolioItem[] = [
+  /* ========================================
+     ENSAIOS + RELIGIOSOS + PROFISSIONAL
+     ORDEM PRINCIPAL DO PORTFÓLIO
+  ======================================== */
+
   {
     id: 1,
     src: "/images/ensaios/autoral/autoral1.jpg",
@@ -95,16 +138,6 @@ export const portfolioItems: PortfolioItem[] = [
 
   {
     id: 5,
-    src: "/images/familias/aniversario-infantil/aniversarioinfantil1.jpg",
-    alt: "Fotografia de aniversário infantil",
-    width: 1200,
-    height: 928,
-    category: "familias",
-    collection: "aniversario-infantil",
-  },
-
-  {
-    id: 6,
     src: "/images/religiosos/batizado/batizado1.jpg",
     alt: "Fotografia de batizado",
     width: 1200,
@@ -114,7 +147,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 7,
+    id: 6,
     src: "/images/ensaios/estudio/estudio1.jpg",
     alt: "Ensaio fotográfico em estúdio",
     width: 1200,
@@ -124,7 +157,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 8,
+    id: 7,
     src: "/images/ensaios/aniversario/bolo13.jpg",
     alt: "Ensaio fotográfico de aniversário",
     width: 1200,
@@ -134,7 +167,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 9,
+    id: 8,
     src: "/images/religiosos/eucaristia/eucaristia4.jpg",
     alt: "Fotografia de primeira eucaristia",
     width: 1200,
@@ -144,7 +177,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 10,
+    id: 9,
     src: "/images/ensaios/autoral/autoral2.jpg",
     alt: "Ensaio fotográfico autoral",
     width: 3456,
@@ -154,7 +187,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 11,
+    id: 10,
     src: "/images/religiosos/casamento/casamento3.jpg",
     alt: "Fotografia de casamento",
     width: 1200,
@@ -164,7 +197,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 12,
+    id: 11,
     src: "/images/ensaios/ar-livre/arlivrecapa.jpg",
     alt: "Ensaio fotográfico ao ar livre",
     width: 1200,
@@ -175,7 +208,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 13,
+    id: 12,
     src: "/images/profissional/profissional7.jpg",
     alt: "Retrato fotográfico profissional",
     width: 1200,
@@ -185,18 +218,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 14,
-    src: "/images/familias/aniversario-infantil/aniversarioinfantilcapa.jpg",
-    alt: "Fotografia de aniversário infantil",
-    width: 1200,
-    height: 1057,
-    category: "familias",
-    collection: "aniversario-infantil",
-    cover: true,
-  },
-
-  {
-    id: 15,
+    id: 13,
     src: "/images/religiosos/batizado/batizadocapa.jpg",
     alt: "Fotografia de batizado",
     width: 1200,
@@ -207,7 +229,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 16,
+    id: 14,
     src: "/images/ensaios/estudio/studio03.jpg",
     alt: "Ensaio fotográfico em estúdio",
     width: 1200,
@@ -217,7 +239,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 17,
+    id: 15,
     src: "/images/ensaios/aniversario/bolo03.jpg",
     alt: "Ensaio fotográfico de aniversário",
     width: 1200,
@@ -227,7 +249,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 18,
+    id: 16,
     src: "/images/religiosos/eucaristia/eucaristia5.jpg",
     alt: "Fotografia de primeira eucaristia",
     width: 1200,
@@ -237,7 +259,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 19,
+    id: 17,
     src: "/images/ensaios/autoral/autoral4.jpg",
     alt: "Ensaio fotográfico autoral",
     width: 3456,
@@ -247,7 +269,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 20,
+    id: 18,
     src: "/images/religiosos/casamento/casamento2.jpg",
     alt: "Fotografia de casamento",
     width: 1200,
@@ -257,7 +279,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 21,
+    id: 19,
     src: "/images/ensaios/ar-livre/arlivre4.jpg",
     alt: "Ensaio fotográfico ao ar livre",
     width: 1200,
@@ -267,7 +289,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 22,
+    id: 20,
     src: "/images/profissional/profissional9.jpg",
     alt: "Retrato fotográfico profissional",
     width: 1200,
@@ -277,17 +299,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 23,
-    src: "/images/familias/aniversario-infantil/aniversarioinfantil3.jpg",
-    alt: "Fotografia de aniversário infantil",
-    width: 1200,
-    height: 1800,
-    category: "familias",
-    collection: "aniversario-infantil",
-  },
-
-  {
-    id: 24,
+    id: 21,
     src: "/images/religiosos/batizado/batizado12.jpg",
     alt: "Fotografia de batizado",
     width: 1200,
@@ -297,7 +309,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 25,
+    id: 22,
     src: "/images/ensaios/estudio/studio06.jpg",
     alt: "Ensaio fotográfico em estúdio",
     width: 1200,
@@ -307,7 +319,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 26,
+    id: 23,
     src: "/images/ensaios/aniversario/bolo12.jpg",
     alt: "Ensaio fotográfico de aniversário",
     width: 1200,
@@ -317,7 +329,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 27,
+    id: 24,
     src: "/images/religiosos/eucaristia/eucaristia2.jpg",
     alt: "Fotografia de primeira eucaristia",
     width: 1200,
@@ -327,7 +339,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 28,
+    id: 25,
     src: "/images/ensaios/autoral/autoral5.jpg",
     alt: "Ensaio fotográfico autoral",
     width: 1200,
@@ -337,7 +349,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 29,
+    id: 26,
     src: "/images/religiosos/casamento/casamento1.jpg",
     alt: "Fotografia de casamento",
     width: 1200,
@@ -347,7 +359,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 30,
+    id: 27,
     src: "/images/ensaios/ar-livre/9-_mg_3683.jpg",
     alt: "Ensaio fotográfico ao ar livre",
     width: 1200,
@@ -357,7 +369,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 31,
+    id: 28,
     src: "/images/profissional/profissional10.jpg",
     alt: "Retrato fotográfico profissional",
     width: 1200,
@@ -367,7 +379,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 32,
+    id: 29,
     src: "/images/religiosos/batizado/batizado5.jpg",
     alt: "Fotografia de batizado",
     width: 1200,
@@ -377,7 +389,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 33,
+    id: 30,
     src: "/images/ensaios/estudio/studio08.jpg",
     alt: "Ensaio fotográfico em estúdio",
     width: 1200,
@@ -387,7 +399,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 34,
+    id: 31,
     src: "/images/ensaios/aniversario/bolo14.jpg",
     alt: "Ensaio fotográfico de aniversário",
     width: 1200,
@@ -397,7 +409,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 35,
+    id: 32,
     src: "/images/ensaios/autoral/autoralcapa.jpg",
     alt: "Ensaio fotográfico autoral",
     width: 1200,
@@ -408,13 +420,102 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 36,
+    id: 33,
     src: "/images/religiosos/casamento/casamentocapa.jpg",
     alt: "Fotografia de casamento",
     width: 1200,
     height: 1800,
     category: "religiosos",
     collection: "casamento",
+    cover: true,
+  },
+
+  /* ========================================
+     CASAMENTO — TODAS AS FOTOS
+  ======================================== */
+
+  {
+    id: 34,
+    src: "/images/religiosos/casamento/casamento4.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 800,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  {
+    id: 35,
+    src: "/images/religiosos/casamento/casamento5.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  {
+    id: 36,
+    src: "/images/religiosos/casamento/casamento6.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  {
+    id: 37,
+    src: "/images/religiosos/casamento/casamento7.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 1844,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  {
+    id: 38,
+    src: "/images/religiosos/casamento/casamento8.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  {
+    id: 39,
+    src: "/images/religiosos/casamento/casamento9.jpg",
+    alt: "Fotografia de casamento",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "casamento",
+  },
+
+  /* ========================================
+     EUCARISTIA — TODAS AS FOTOS
+  ======================================== */
+
+  {
+    id: 40,
+    src: "/images/religiosos/eucaristia/eucaristia3.jpg",
+    alt: "Fotografia de primeira eucaristia",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "eucaristia",
+  },
+
+  {
+    id: 41,
+    src: "/images/religiosos/eucaristia/eucaristiacapa.jpg",
+    alt: "Fotografia de primeira eucaristia",
+    width: 1200,
+    height: 1800,
+    category: "religiosos",
+    collection: "eucaristia",
     cover: true,
   },
 ];

@@ -5,8 +5,10 @@ import { useMemo, useState } from "react";
 
 import {
   portfolioCategories,
+  portfolioCollections,
   portfolioItems,
   type PortfolioCategory,
+  type PortfolioCollection,
 } from "@/data/portfolio";
 
 import styles from "./PortfolioGrid.module.css";
@@ -15,6 +17,10 @@ type ActiveCategory =
   | "todos"
   | PortfolioCategory;
 
+type ActiveCollection =
+  | "todos"
+  | PortfolioCollection;
+
 const INITIAL_ITEMS = 12;
 const ITEMS_PER_LOAD = 12;
 
@@ -22,31 +28,48 @@ export default function PortfolioGrid() {
   const [activeCategory, setActiveCategory] =
     useState<ActiveCategory>("todos");
 
+  const [activeCollection, setActiveCollection] =
+    useState<ActiveCollection>("todos");
+
   const [visibleCount, setVisibleCount] =
     useState(INITIAL_ITEMS);
 
   const [failedImages, setFailedImages] =
     useState<number[]>([]);
 
+  const currentCollections =
+    activeCategory === "todos"
+      ? []
+      : portfolioCollections[activeCategory] ?? [];
+
   const filteredItems = useMemo(() => {
-    const validItems = portfolioItems.filter(
+    let items = portfolioItems.filter(
       (item) => !failedImages.includes(item.id)
     );
 
-    if (activeCategory === "todos") {
-      return validItems;
+    if (activeCategory !== "todos") {
+      items = items.filter(
+        (item) =>
+          item.category === activeCategory
+      );
     }
 
-    return validItems.filter(
-      (item) =>
-        item.category === activeCategory
-    );
-  }, [activeCategory, failedImages]);
+    if (activeCollection !== "todos") {
+      items = items.filter(
+        (item) =>
+          item.collection === activeCollection
+      );
+    }
 
-  const visibleItems = filteredItems.slice(
-    0,
-    visibleCount
-  );
+    return items;
+  }, [
+    activeCategory,
+    activeCollection,
+    failedImages,
+  ]);
+
+  const visibleItems =
+    filteredItems.slice(0, visibleCount);
 
   const hasMore =
     visibleCount < filteredItems.length;
@@ -55,6 +78,19 @@ export default function PortfolioGrid() {
     category: ActiveCategory
   ) {
     setActiveCategory(category);
+
+    // Sempre volta para "Todos"
+    // ao trocar a categoria principal.
+    setActiveCollection("todos");
+
+    setVisibleCount(INITIAL_ITEMS);
+  }
+
+  function handleCollectionChange(
+    collection: ActiveCollection
+  ) {
+    setActiveCollection(collection);
+
     setVisibleCount(INITIAL_ITEMS);
   }
 
@@ -79,34 +115,100 @@ export default function PortfolioGrid() {
 
   return (
     <div className={styles.wrapper}>
-      <div
-        className={styles.filters}
-        aria-label="Filtrar portfólio por categoria"
-      >
-        {portfolioCategories.map((category) => {
-          const isActive =
-            activeCategory === category.value;
+      <div className={styles.filterArea}>
+        {/* CATEGORIAS PRINCIPAIS */}
+        <div
+          className={styles.filters}
+          aria-label="Filtrar portfólio por categoria"
+        >
+          {portfolioCategories.map(
+            (category) => {
+              const isActive =
+                activeCategory ===
+                category.value;
 
-          return (
+              return (
+                <button
+                  key={category.value}
+                  type="button"
+                  className={`${styles.filterButton} ${
+                    isActive
+                      ? styles.active
+                      : ""
+                  }`}
+                  aria-pressed={isActive}
+                  onClick={() =>
+                    handleCategoryChange(
+                      category.value
+                    )
+                  }
+                >
+                  {category.label}
+                </button>
+              );
+            }
+          )}
+        </div>
+
+        {/* SUBCATEGORIAS */}
+        {currentCollections.length > 0 && (
+          <div
+            className={styles.subfilters}
+            aria-label={`Filtrar ${
+              activeCategory === "ensaios"
+                ? "ensaios"
+                : "religiosos"
+            } por tipo`}
+          >
             <button
-              key={category.value}
               type="button"
-              className={`${styles.filterButton} ${
-                isActive ? styles.active : ""
+              className={`${styles.subfilterButton} ${
+                activeCollection === "todos"
+                  ? styles.subfilterActive
+                  : ""
               }`}
-              aria-pressed={isActive}
+              aria-pressed={
+                activeCollection === "todos"
+              }
               onClick={() =>
-                handleCategoryChange(
-                  category.value
-                )
+                handleCollectionChange("todos")
               }
             >
-              {category.label}
+              Todos
             </button>
-          );
-        })}
+
+            {currentCollections.map(
+              (collection) => {
+                const isActive =
+                  activeCollection ===
+                  collection.value;
+
+                return (
+                  <button
+                    key={collection.value}
+                    type="button"
+                    className={`${styles.subfilterButton} ${
+                      isActive
+                        ? styles.subfilterActive
+                        : ""
+                    }`}
+                    aria-pressed={isActive}
+                    onClick={() =>
+                      handleCollectionChange(
+                        collection.value
+                      )
+                    }
+                  >
+                    {collection.label}
+                  </button>
+                );
+              }
+            )}
+          </div>
+        )}
       </div>
 
+      {/* GALERIA */}
       {visibleItems.length > 0 ? (
         <div className={styles.grid}>
           {visibleItems.map((item) => (
@@ -114,7 +216,11 @@ export default function PortfolioGrid() {
               key={item.id}
               className={styles.item}
             >
-              <div className={styles.imageWrapper}>
+              <div
+                className={
+                  styles.imageWrapper
+                }
+              >
                 <Image
                   src={item.src}
                   alt={item.alt}
@@ -127,7 +233,9 @@ export default function PortfolioGrid() {
                   "
                   className={styles.image}
                   onError={() =>
-                    handleImageError(item.id)
+                    handleImageError(
+                      item.id
+                    )
                   }
                 />
               </div>
@@ -143,15 +251,25 @@ export default function PortfolioGrid() {
         </div>
       )}
 
+      {/* VER MAIS */}
       {hasMore && (
-        <div className={styles.loadMoreWrapper}>
+        <div
+          className={
+            styles.loadMoreWrapper
+          }
+        >
           <button
             type="button"
             className={styles.loadMore}
             onClick={handleLoadMore}
           >
-            <span>Ver mais fotografias</span>
-            <span aria-hidden="true">↓</span>
+            <span>
+              Ver mais fotografias
+            </span>
+
+            <span aria-hidden="true">
+              ↓
+            </span>
           </button>
         </div>
       )}
