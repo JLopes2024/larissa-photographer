@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   useCallback,
   useState,
@@ -30,14 +31,18 @@ export default function Header() {
     setMenuOpen(false);
   }, []);
 
-  function isCurrentPage(href: string) {
+  function isCurrentPage(
+    href: string
+  ) {
     if (href === "/") {
       return pathname === "/";
     }
 
     return (
       pathname === href ||
-      pathname.startsWith(`${href}/`)
+      pathname.startsWith(
+        `${href}/`
+      )
     );
   }
 
@@ -50,10 +55,20 @@ export default function Header() {
             : styles.light
         }`}
       >
-        <div className={styles.container}>
+        <div
+          className={`${styles.container} ${
+            isHome
+              ? styles.homeContainer
+              : ""
+          }`}
+        >
           <Link
             href="/"
-            className={styles.logo}
+            className={`${styles.logo} ${
+              isHome
+                ? styles.homeLogo
+                : ""
+            }`}
             aria-label="Larissa Photographer — página inicial"
           >
             <Image
@@ -71,37 +86,45 @@ export default function Header() {
           </Link>
 
           <nav
-            className={styles.navigation}
+            className={
+              styles.navigation
+            }
             aria-label="Navegação principal"
           >
-            {navigation.map((item) => {
-              const active =
-                isCurrentPage(item.href);
+            {navigation.map(
+              (item) => {
+                const active =
+                  isCurrentPage(
+                    item.href
+                  );
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={
-                    active
-                      ? "page"
-                      : undefined
-                  }
-                  className={`${styles.navLink} ${
-                    active
-                      ? styles.active
-                      : ""
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={
+                      active
+                        ? "page"
+                        : undefined
+                    }
+                    className={`${styles.navLink} ${
+                      active
+                        ? styles.active
+                        : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+            )}
           </nav>
 
           <button
             type="button"
-            className={styles.menuButton}
+            className={
+              styles.menuButton
+            }
             onClick={openMenu}
             aria-label="Abrir menu principal"
             aria-expanded={menuOpen}

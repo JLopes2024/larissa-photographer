@@ -11,43 +11,94 @@
   color: #ffffff;
 }
 
+/* ========================================
+   SLIDES
+======================================== */
+
+.slides {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 1000ms
+    cubic-bezier(
+      0.4,
+      0,
+      0.2,
+      1
+    );
+}
+
+.activeSlide {
+  opacity: 1;
+}
+
 .background {
   object-fit: cover;
 
-  /*
-    Ajustado pensando na foto vertical:
-    preserva a modelo e deixa área à esquerda para o texto.
-  */
-  object-position: 54% 48%;
+  object-position:
+    var(
+      --desktop-position,
+      50% 50%
+    );
+
+  user-select: none;
 }
+
+/* ========================================
+   OVERLAY
+======================================== */
 
 .overlay {
   position: absolute;
   inset: 0;
 
+  z-index: 1;
+
+  pointer-events: none;
+
   background:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.62) 0%,
-      rgba(0, 0, 0, 0.4) 24%,
-      rgba(0, 0, 0, 0.12) 52%,
-      rgba(0, 0, 0, 0.03) 75%,
-      rgba(0, 0, 0, 0.14) 100%
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 23%,
+      rgba(0, 0, 0, 0.12) 50%,
+      rgba(0, 0, 0, 0.03) 76%,
+      rgba(0, 0, 0, 0.08) 100%
     ),
     linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.08) 38%,
+      rgba(0, 0, 0, 0.48) 0%,
+      rgba(0, 0, 0, 0.11) 40%,
       transparent 68%
     );
 }
 
+/* ========================================
+   CONTEÚDO
+======================================== */
+
 .container {
   position: relative;
+
   z-index: 2;
 
   width: min(
-    calc(100% - (var(--container-padding) * 2)),
+    calc(
+      100% -
+      (var(--container-padding) * 2)
+    ),
     var(--container-width)
   );
 
@@ -58,51 +109,73 @@
   display: flex;
   align-items: flex-end;
 
-  padding-bottom: clamp(46px, 6vh, 72px);
+  padding-bottom:
+    clamp(
+      88px,
+      10vh,
+      116px
+    );
 }
 
 .content {
-  width: min(100%, 540px);
-}
-
-.eyebrow {
-  margin-bottom: 22px;
-
-  color: rgba(255, 255, 255, 0.88);
-
-  font-size: 0.64rem;
-  font-weight: 600;
-
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
+  width: min(
+    100%,
+    540px
+  );
 }
 
 .title {
   color: #ffffff;
 
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: clamp(4.7rem, 6.6vw, 7.2rem);
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      4.6rem,
+      6.2vw,
+      6.8rem
+    );
+
   font-weight: 400;
 
-  line-height: 0.76;
+  line-height: 0.78;
   letter-spacing: -0.045em;
+
+  text-shadow:
+    0 2px 22px
+    rgba(0, 0, 0, 0.12);
 }
 
+/* ========================================
+   CATEGORIAS
+======================================== */
+
 .categories {
-  margin-top: 30px;
+  margin-top: 28px;
 
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 
-  gap: 8px 12px;
+  gap: 7px 11px;
 
-  color: rgba(255, 255, 255, 0.82);
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.82
+    );
 
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 600;
 
-  letter-spacing: 0.23em;
+  line-height: 1.7;
+
+  letter-spacing: 0.21em;
   text-transform: uppercase;
 }
 
@@ -110,24 +183,39 @@
   color: var(--color-detail);
 }
 
+/* ========================================
+   CTA
+======================================== */
+
 .cta {
   width: 220px;
 
-  margin-top: 34px;
-  padding: 12px 0 14px;
+  margin-top: 30px;
+
+  padding:
+    11px
+    0
+    13px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
 
   color: #ffffff;
 
-  font-size: 0.62rem;
+  font-size: 0.61rem;
   font-weight: 600;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.19em;
   text-transform: uppercase;
 
   transition:
@@ -136,31 +224,118 @@
 }
 
 .cta:hover {
-  width: 235px;
-  opacity: 0.78;
+  width: 232px;
+
+  opacity: 0.76;
 }
 
-/* =========================
-   NOTEBOOK / TABLET
-========================= */
+/* ========================================
+   PAGINAÇÃO
+======================================== */
+
+.pagination {
+  position: absolute;
+
+  z-index: 3;
+
+  left: 50%;
+  bottom: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  transform:
+    translateX(-50%);
+}
+
+.paginationButton {
+  width: 18px;
+  height: 28px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.paginationButton span {
+  width: 5px;
+  height: 5px;
+
+  display: block;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.8
+    );
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    opacity 220ms ease;
+}
+
+.paginationButton:hover span {
+  border-color: #ffffff;
+
+  transform: scale(1.2);
+}
+
+.paginationActive span {
+  background: #ffffff;
+  border-color: #ffffff;
+
+  transform: scale(1.35);
+}
+
+/* ========================================
+   TABLET
+======================================== */
 
 @media (max-width: 1100px) {
-  .background {
-    object-position: 56% center;
+  .container {
+    padding-bottom: 94px;
   }
 
   .content {
-    width: min(100%, 480px);
+    width: min(
+      100%,
+      490px
+    );
   }
 
   .title {
-    font-size: clamp(4.4rem, 8vw, 6.5rem);
+    font-size:
+      clamp(
+        4.2rem,
+        8vw,
+        6.1rem
+      );
   }
 }
 
-/* =========================
+/* ========================================
    MOBILE
-========================= */
+======================================== */
 
 @media (max-width: 700px) {
   .hero {
@@ -168,76 +343,110 @@
   }
 
   .background {
-    /*
-      No mobile conseguimos aproveitar muito melhor
-      a proporção vertical da fotografia.
-    */
-    object-position: 50% center;
+    object-position:
+      var(
+        --mobile-position,
+        50% 50%
+      );
   }
 
   .overlay {
     background:
       linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.72) 0%,
-        rgba(0, 0, 0, 0.25) 43%,
-        rgba(0, 0, 0, 0.04) 72%
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.28) 42%,
+        rgba(0, 0, 0, 0.04) 72%,
+        rgba(0, 0, 0, 0.1) 100%
       );
   }
 
   .container {
-    padding-bottom: 32px;
+    padding-bottom: 86px;
   }
 
   .content {
     width: 100%;
   }
 
-  .eyebrow {
-    margin-bottom: 14px;
-
-    font-size: 0.56rem;
-    letter-spacing: 0.26em;
-  }
-
   .title {
-    font-size: clamp(3.8rem, 17vw, 5.4rem);
+    font-size:
+      clamp(
+        3.7rem,
+        16.5vw,
+        5.2rem
+      );
 
-    line-height: 0.77;
+    line-height: 0.78;
   }
 
   .categories {
-    margin-top: 22px;
+    margin-top: 21px;
 
-    gap: 6px 8px;
+    gap: 5px 8px;
 
-    font-size: 0.50rem;
-    letter-spacing: 0.16em;
+    font-size: 0.5rem;
+
+    line-height: 1.65;
+
+    letter-spacing: 0.15em;
   }
 
   .cta {
     width: 100%;
 
-    margin-top: 26px;
+    margin-top: 24px;
 
-    font-size: 0.58rem;
+    font-size: 0.57rem;
   }
 
   .cta:hover {
     width: 100%;
   }
+
+  .pagination {
+    bottom: 21px;
+
+    gap: 4px;
+  }
 }
 
-/* =========================
+/* ========================================
    CELULARES PEQUENOS
-========================= */
+======================================== */
 
 @media (max-width: 390px) {
+  .container {
+    padding-bottom: 78px;
+  }
+
   .title {
-    font-size: clamp(3.4rem, 17vw, 4.4rem);
+    font-size:
+      clamp(
+        3.3rem,
+        16.5vw,
+        4.3rem
+      );
   }
 
   .categories {
-    font-size: 0.2rem;
+    font-size: 0.46rem;
+
+    letter-spacing: 0.11em;
+  }
+}
+
+/* ========================================
+   REDUÇÃO DE MOVIMENTO
+======================================== */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .slide,
+  .paginationButton span,
+  .cta {
+    transition: none;
   }
 }

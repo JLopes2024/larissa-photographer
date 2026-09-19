@@ -1,12 +1,10 @@
 .header {
   width: 100%;
-
   z-index: 50;
 }
 
 .transparent {
   position: absolute;
-
   top: 0;
   left: 0;
 
@@ -17,9 +15,7 @@
 .light {
   position: relative;
 
-  background:
-    var(--color-secondary);
-
+  background: var(--color-secondary);
   color: var(--color-text);
 
   border-bottom:
@@ -27,11 +23,17 @@
     var(--color-border);
 }
 
+/* ========================================
+   CONTAINER
+======================================== */
+
 .container {
+  position: relative;
+
   width: min(
     calc(
       100% -
-        (var(--container-padding) * 2)
+      (var(--container-padding) * 2)
     ),
     var(--container-width)
   );
@@ -47,17 +49,28 @@
   gap: 40px;
 }
 
+/*
+  DESKTOP:
+  mantém o comportamento original.
+  Logo à esquerda e navegação à direita.
+*/
+.homeContainer {
+  height: 100px;
+}
+
 /* ========================================
    LOGO
 ======================================== */
 
 .logo {
   position: relative;
+  z-index: 2;
 
   flex-shrink: 0;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .logoImage {
@@ -65,6 +78,18 @@
   height: 58px;
 
   object-fit: contain;
+}
+
+/*
+  Na Home desktop, a logo continua
+  no fluxo normal à esquerda.
+*/
+.homeLogo {
+  position: relative;
+}
+
+.homeLogo .logoImage {
+  height: 58px;
 }
 
 .logoLight {
@@ -78,27 +103,34 @@
 ======================================== */
 
 .navigation {
+  position: relative;
+  z-index: 3;
+
   display: flex;
   align-items: center;
 
-  gap: clamp(24px, 3vw, 44px);
+  gap:
+    clamp(
+      20px,
+      2.5vw,
+      40px
+    );
 }
 
 .navLink {
   position: relative;
 
-  padding:
-    10px
-    0;
+  padding: 10px 0;
 
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 600;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.21em;
   text-transform: uppercase;
 
   transition:
-    color 180ms ease;
+    color 180ms ease,
+    opacity 180ms ease;
 }
 
 .navLink::after {
@@ -121,6 +153,10 @@
     transform 180ms ease;
 }
 
+.navLink:hover {
+  opacity: 0.75;
+}
+
 .navLink:hover::after,
 .navLink:focus-visible::after,
 .active::after {
@@ -133,6 +169,9 @@
 ======================================== */
 
 .menuButton {
+  position: relative;
+  z-index: 3;
+
   width: 44px;
   height: 44px;
 
@@ -156,7 +195,7 @@
 }
 
 .menuButton span {
-  width: 25px;
+  width: 24px;
   height: 1px;
 
   display: block;
@@ -169,16 +208,19 @@
 }
 
 .menuButton:hover span:last-child {
-  width: 18px;
+  width: 17px;
 }
 
 /* ========================================
    TABLET / MOBILE
+
+   Aqui sim centralizamos a logo.
 ======================================== */
 
-@media (max-width: 900px) {
-  .container {
-    height: 82px;
+@media (max-width: 1080px) {
+  .container,
+  .homeContainer {
+    height: 88px;
   }
 
   .navigation {
@@ -187,18 +229,59 @@
 
   .menuButton {
     display: flex;
+
+    margin-left: auto;
   }
 
   .logoImage {
-    height: 46px;
+    height: 48px;
+  }
+
+  .homeLogo {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      );
+  }
+
+  .homeLogo .logoImage {
+    height: 68px;
   }
 }
 
 /* ========================================
-   REDUZIR MOVIMENTO
+   MOBILE
 ======================================== */
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 600px) {
+  .container,
+  .homeContainer {
+    height: 84px;
+  }
+
+  .logoImage {
+    height: 44px;
+  }
+
+  .homeLogo .logoImage {
+    height: 62px;
+  }
+}
+
+/* ========================================
+   REDUÇÃO DE MOVIMENTO
+======================================== */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
   .navLink,
   .navLink::after,
   .menuButton span {
