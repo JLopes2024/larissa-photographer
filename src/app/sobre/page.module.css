@@ -1,94 +1,62 @@
 .page {
   min-height: 100vh;
 
+  overflow: hidden;
+
   background: var(--color-background);
   color: var(--color-text);
 }
 
-.about {
-  padding:
-    clamp(70px, 8vw, 120px)
-    0
-    clamp(90px, 10vw, 140px);
-}
-
 .container {
   width: min(
-    calc(100% - (var(--container-padding) * 2)),
+    calc(
+      100% -
+        (var(--container-padding) * 2)
+    ),
     var(--container-width)
   );
 
   margin-inline: auto;
+}
 
+/* ========================================
+   ABERTURA
+======================================== */
+
+.hero {
+  padding:
+    clamp(80px, 8vw, 120px)
+    0
+    clamp(110px, 11vw, 170px);
+}
+
+.hero .container {
   display: grid;
+
   grid-template-columns:
     minmax(0, 0.9fr)
-    minmax(360px, 0.7fr);
+    minmax(380px, 0.72fr);
 
   align-items: center;
 
-  gap: clamp(60px, 9vw, 140px);
+  gap:
+    clamp(
+      70px,
+      10vw,
+      150px
+    );
 }
 
-/* ========================================
-   FOTO
-======================================== */
-
-.visual {
+.heroContent {
   position: relative;
 
-  width: 100%;
-}
-
-.imageWrapper {
-  position: relative;
-
-  width: min(100%, 540px);
-  aspect-ratio: 4 / 5;
-
-  overflow: hidden;
-
-  background: #e8e3dd;
-}
-
-.image {
-  object-fit: cover;
-  object-position: center;
-
-  filter: grayscale(100%);
-}
-
-.handwritten {
-  position: absolute;
-
-  right: -2%;
-  bottom: 9%;
-
-  color: var(--color-detail);
-
-  font-family: var(--font-script), cursive;
-  font-size: clamp(2.8rem, 4vw, 4.8rem);
-  font-weight: 400;
-
-  line-height: 0.72;
-
-  text-align: right;
-
-  transform: rotate(-6deg);
-}
-
-/* ========================================
-   CONTEÚDO
-======================================== */
-
-.content {
-  max-width: 600px;
+  z-index: 2;
 }
 
 .eyebrow {
   display: block;
 
-  margin-bottom: 22px;
+  margin-bottom: 34px;
 
   color: var(--color-primary);
 
@@ -99,75 +67,471 @@
   text-transform: uppercase;
 }
 
-.title {
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: clamp(5rem, 7.5vw, 8rem);
+.heroTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      5rem,
+      7.8vw,
+      8.7rem
+    );
+
   font-weight: 400;
 
-  line-height: 0.78;
-  letter-spacing: -0.05em;
+  line-height: 0.76;
+  letter-spacing: -0.055em;
 }
 
-.text {
-  max-width: 48ch;
+.heroIntroduction {
+  max-width: 42ch;
 
-  margin-top: 36px;
-}
+  margin-top: 42px;
 
-.text p {
   color: var(--color-muted);
 
-  font-size: 0.98rem;
-  line-height: 1.8;
-}
-
-.text p + p {
-  margin-top: 18px;
-}
-
-.lead {
-  color: var(--color-text) !important;
-
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: clamp(1.45rem, 2vw, 2rem) !important;
-
-  line-height: 1.25 !important;
+  font-size: 0.96rem;
+  line-height: 1.85;
 }
 
 /* ========================================
-   CTA
+   FOTO PRINCIPAL
 ======================================== */
 
-.cta {
-  width: fit-content;
+.heroVisual {
+  position: relative;
 
-  margin-top: 34px;
-  padding-block: 10px;
+  width: 100%;
+}
 
-  display: inline-flex;
+.heroImageWrapper {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #e4dfd9;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageIndex {
+  position: absolute;
+
+  right: -38px;
+  bottom: 22px;
+
+  color: var(--color-primary);
+
+  font-size: 0.59rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  transform: rotate(-90deg);
+
+  transform-origin: center;
+}
+
+/* ========================================
+   LABELS DE SEÇÃO
+======================================== */
+
+.sectionLabel {
+  display: flex;
   align-items: center;
 
-  gap: 22px;
+  gap: 18px;
 
-  border-bottom: 1px solid var(--color-primary);
+  color: var(--color-primary);
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+}
+
+.sectionLabel span:first-child {
+  min-width: 24px;
+
+  color: var(--color-muted);
+}
+
+/* ========================================
+   HISTÓRIA
+======================================== */
+
+.story {
+  padding:
+    clamp(90px, 10vw, 150px)
+    0;
+
+  border-top:
+    1px solid
+    var(--color-border);
+}
+
+.storyContent {
+  margin-top:
+    clamp(
+      55px,
+      7vw,
+      100px
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(300px, 0.55fr);
+
+  align-items: start;
+
+  gap:
+    clamp(
+      60px,
+      10vw,
+      160px
+    );
+}
+
+.storyLead {
+  max-width: 760px;
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      3.3rem,
+      5vw,
+      5.8rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+
+.storyText {
+  max-width: 43ch;
+}
+
+.storyText p {
+  color: var(--color-muted);
+
+  font-size: 0.94rem;
+  line-height: 1.82;
+}
+
+.storyText p + p {
+  margin-top: 20px;
+}
+
+/* ========================================
+   LINK
+======================================== */
+
+.textLink {
+  width: 230px;
+
+  margin-top: 36px;
+
+  padding:
+    12px
+    0
+    14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+    1px solid
+    var(--color-primary);
 
   color: var(--color-text);
 
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 
   transition:
-    gap 180ms ease,
+    width 220ms ease,
     color 180ms ease;
 }
 
-.cta:hover {
-  gap: 30px;
+.textLink:hover {
+  width: 246px;
 
   color: var(--color-primary);
+}
+
+/* ========================================
+   JEITO DE FOTOGRAFAR
+======================================== */
+
+.approach {
+  background: var(--color-dark);
+  color: #ffffff;
+}
+
+.approachContainer {
+  display: grid;
+
+  grid-template-columns:
+    minmax(420px, 0.92fr)
+    minmax(0, 1fr);
+
+  min-height: 900px;
+}
+
+/* ========================================
+   FOTO SECUNDÁRIA
+======================================== */
+
+.approachVisual {
+  position: relative;
+
+  min-height: 900px;
+
+  overflow: hidden;
+
+  background: #211b19;
+}
+
+.approachImage {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.approachImageOverlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0.04) 44%,
+      transparent 66%
+    );
+
+  pointer-events: none;
+}
+
+.approachVisualLabel {
+  position: absolute;
+
+  z-index: 2;
+
+  top: 42px;
+  left:
+    max(
+      var(--container-padding),
+      calc(
+        (
+          100vw -
+          var(--container-width)
+        ) / 2
+      )
+    );
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.68
+    );
+
+  font-size: 0.58rem;
+  font-weight: 600;
+
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   CONTEÚDO DO MÉTODO
+======================================== */
+
+.approachContent {
+  padding:
+    clamp(
+      80px,
+      8vw,
+      130px
+    )
+    clamp(
+      50px,
+      8vw,
+      130px
+    );
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.approachEyebrow {
+  margin-bottom: 28px;
+
+  color: var(--color-detail);
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.approachTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      4.2rem,
+      6vw,
+      7rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.79;
+  letter-spacing: -0.05em;
+}
+
+.approachIntroduction {
+  max-width: 46ch;
+
+  margin-top: 34px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.66
+    );
+
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   PRINCÍPIOS
+======================================== */
+
+.principles {
+  margin-top: 64px;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+}
+
+.principle {
+  padding:
+    24px
+    0
+    26px;
+
+  display: grid;
+
+  grid-template-columns:
+    44px
+    minmax(0, 1fr);
+
+  gap: 16px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+}
+
+.principleNumber {
+  padding-top: 6px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+
+  font-size: 0.56rem;
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+}
+
+.principle h3 {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.9rem,
+      2.4vw,
+      2.8rem
+    );
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.principle p {
+  max-width: 46ch;
+
+  margin-top: 10px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.56
+    );
+
+  font-size: 0.8rem;
+  line-height: 1.7;
 }
 
 /* ========================================
@@ -175,67 +539,359 @@
 ======================================== */
 
 .specialties {
-  margin-top: 54px;
+  padding:
+    clamp(
+      100px,
+      11vw,
+      170px
+    )
+    0;
+}
 
+.specialtiesHeader {
   display: grid;
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
 
-  border-top: 1px solid var(--color-border);
-  border-left: 1px solid var(--color-border);
+  grid-template-columns:
+    minmax(180px, 0.45fr)
+    minmax(0, 1fr);
+
+  align-items: start;
+
+  gap:
+    clamp(
+      50px,
+      9vw,
+      130px
+    );
+
+  margin-bottom:
+    clamp(
+      70px,
+      8vw,
+      110px
+    );
+}
+
+.specialtiesTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      4rem,
+      6vw,
+      6.6rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+}
+
+.specialtiesList {
+  border-top:
+    1px solid
+    var(--color-border);
 }
 
 .specialty {
-  min-height: 105px;
+  min-height: 118px;
 
-  padding: 16px 18px;
+  display: grid;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  grid-template-columns:
+    70px
+    minmax(0, 1fr)
+    auto;
 
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+
+  gap: 20px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+
+  color: var(--color-text);
+
+  transition:
+    padding-left 260ms ease,
+    color 180ms ease;
 }
 
-.specialty span {
-  color: var(--color-primary);
+.specialty:hover {
+  padding-left: 16px;
 
-  font-size: 0.56rem;
+  color: var(--color-primary);
+}
+
+.specialtyNumber {
+  color: var(--color-muted);
+
+  font-size: 0.58rem;
   font-weight: 600;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 
-.specialty p {
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: 1.65rem;
+.specialtyTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      2.3rem,
+      4vw,
+      4.5rem
+    );
+
   font-weight: 400;
 
   line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.specialtyArrow {
+  font-size: 1.1rem;
+
+  transition:
+    transform 220ms ease;
+}
+
+.specialty:hover .specialtyArrow {
+  transform:
+    translate(
+      5px,
+      -5px
+    );
+}
+
+/* ========================================
+   CTA FINAL
+======================================== */
+
+.closing {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.closingContainer {
+  width: min(
+    calc(
+      100% -
+        (var(--container-padding) * 2)
+    ),
+    var(--container-width)
+  );
+
+  margin-inline: auto;
+
+  padding:
+    clamp(
+      90px,
+      10vw,
+      150px
+    )
+    0;
+}
+
+.closingEyebrow {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.64
+    );
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.closingContent {
+  margin-top: 32px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(260px, 0.38fr);
+
+  align-items: end;
+
+  gap:
+    clamp(
+      50px,
+      8vw,
+      120px
+    );
+}
+
+.closingTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      4.4rem,
+      7vw,
+      7.8rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+.closingAction p {
+  max-width: 34ch;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.76
+    );
+
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+.closingLink {
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding:
+    13px
+    0
+    15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.64
+    );
+
+  color: #ffffff;
+
+  font-size: 0.61rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  transition:
+    opacity 180ms ease;
+}
+
+.closingLink:hover {
+  opacity: 0.7;
+}
+
+/* ========================================
+   NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .hero .container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(340px, 0.78fr);
+
+    gap: 60px;
+  }
+
+  .approachContainer {
+    grid-template-columns:
+      minmax(360px, 0.82fr)
+      minmax(0, 1fr);
+  }
+
+  .approachContent {
+    padding:
+      80px
+      60px;
+  }
 }
 
 /* ========================================
    TABLET
 ======================================== */
 
-@media (max-width: 950px) {
-  .container {
+@media (max-width: 850px) {
+  .hero .container {
     grid-template-columns:
       minmax(0, 1fr)
-      minmax(320px, 0.8fr);
+      minmax(300px, 0.8fr);
+
+    gap: 44px;
+  }
+
+  .storyContent {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(260px, 0.7fr);
 
     gap: 50px;
   }
 
-  .title {
-    font-size: clamp(4.5rem, 8vw, 6.5rem);
+  .approachContainer {
+    display: block;
+
+    min-height: 0;
   }
 
-  .handwritten {
-    right: 0;
+  .approachVisual {
+    min-height: 0;
 
-    font-size: clamp(2.6rem, 5vw, 4rem);
+    aspect-ratio: 4 / 5;
+  }
+
+  .approachContent {
+    width: min(
+      calc(
+        100% -
+          (var(--container-padding) * 2)
+      ),
+      var(--container-width)
+    );
+
+    margin-inline: auto;
+
+    padding:
+      90px
+      0
+      110px;
+  }
+
+  .approachVisualLabel {
+    left: var(--container-padding);
+  }
+
+  .closingContent {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
   }
 }
 
@@ -244,94 +900,249 @@
 ======================================== */
 
 @media (max-width: 700px) {
-  .about {
+  .hero {
     padding:
-      48px
+      54px
       0
-      80px;
+      82px;
   }
 
-  .container {
+  .hero .container {
     display: flex;
     flex-direction: column;
 
-    gap: 46px;
+    gap: 48px;
   }
 
-  .visual {
+  .heroContent {
     width: 100%;
-  }
-
-  .imageWrapper {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-  }
-
-  .handwritten {
-    right: 2%;
-    bottom: 6%;
-
-    font-size: clamp(2.7rem, 13vw, 4rem);
-  }
-
-  .content {
-    width: 100%;
-    max-width: none;
   }
 
   .eyebrow {
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 
-    font-size: 0.6rem;
+    font-size: 0.58rem;
   }
 
-  .title {
-    font-size: clamp(4.3rem, 20vw, 6.2rem);
+  .heroTitle {
+    font-size:
+      clamp(
+        4.2rem,
+        19vw,
+        6rem
+      );
 
-    line-height: 0.79;
+    line-height: 0.77;
   }
 
-  .text {
-    margin-top: 28px;
-  }
+  .heroIntroduction {
+    max-width: 34ch;
 
-  .lead {
-    font-size: 1.55rem !important;
-  }
-
-  .cta {
     margin-top: 30px;
+
+    font-size: 0.9rem;
   }
+
+  .heroVisual {
+    width: 100%;
+  }
+
+  .imageIndex {
+    right: -28px;
+  }
+
+  /* HISTÓRIA */
+
+  .story {
+    padding:
+      80px
+      0
+      90px;
+  }
+
+  .sectionLabel {
+    font-size: 0.56rem;
+
+    letter-spacing: 0.18em;
+  }
+
+  .storyContent {
+    display: block;
+
+    margin-top: 46px;
+  }
+
+  .storyLead {
+    font-size:
+      clamp(
+        3rem,
+        13vw,
+        4.3rem
+      );
+  }
+
+  .storyText {
+    margin-top: 34px;
+  }
+
+  .storyText p {
+    font-size: 0.9rem;
+  }
+
+  .textLink {
+    width: 100%;
+  }
+
+  .textLink:hover {
+    width: 100%;
+  }
+
+  /* ABORDAGEM */
+
+  .approachVisual {
+    aspect-ratio: 4 / 5;
+  }
+
+  .approachVisualLabel {
+    top: 24px;
+  }
+
+  .approachContent {
+    padding:
+      72px
+      0
+      82px;
+  }
+
+  .approachEyebrow {
+    font-size: 0.56rem;
+  }
+
+  .approachTitle {
+    font-size:
+      clamp(
+        3.6rem,
+        16vw,
+        5.2rem
+      );
+  }
+
+  .approachIntroduction {
+    margin-top: 26px;
+
+    font-size: 0.88rem;
+  }
+
+  .principles {
+    margin-top: 50px;
+  }
+
+  .principle {
+    grid-template-columns:
+      34px
+      minmax(0, 1fr);
+
+    padding:
+      20px
+      0
+      22px;
+  }
+
+  .principle h3 {
+    font-size: 2rem;
+  }
+
+  /* ESPECIALIDADES */
 
   .specialties {
-    margin-top: 44px;
+    padding:
+      82px
+      0
+      96px;
+  }
+
+  .specialtiesHeader {
+    display: block;
+
+    margin-bottom: 52px;
+  }
+
+  .specialtiesTitle {
+    margin-top: 28px;
+
+    font-size:
+      clamp(
+        3.5rem,
+        15vw,
+        5rem
+      );
   }
 
   .specialty {
-    min-height: 92px;
+    min-height: 90px;
 
-    padding: 14px;
+    grid-template-columns:
+      38px
+      minmax(0, 1fr)
+      auto;
+
+    gap: 10px;
   }
 
-  .specialty p {
-    font-size: 1.45rem;
+  .specialty:hover {
+    padding-left: 0;
+  }
+
+  .specialtyTitle {
+    font-size:
+      clamp(
+        2rem,
+        9vw,
+        2.8rem
+      );
+  }
+
+  /* CTA */
+
+  .closingContainer {
+    padding:
+      82px
+      0
+      92px;
+  }
+
+  .closingEyebrow {
+    font-size: 0.56rem;
+  }
+
+  .closingContent {
+    margin-top: 26px;
+
+    gap: 38px;
+  }
+
+  .closingTitle {
+    font-size:
+      clamp(
+        3.7rem,
+        16vw,
+        5.3rem
+      );
   }
 }
 
 /* ========================================
-   CELULARES PEQUENOS
+   REDUÇÃO DE MOVIMENTO
 ======================================== */
 
-@media (max-width: 390px) {
-  .title {
-    font-size: clamp(3.8rem, 19vw, 5rem);
-  }
-
-  .handwritten {
-    font-size: 2.8rem;
-  }
-
-  .specialty p {
-    font-size: 1.3rem;
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .textLink,
+  .specialty,
+  .specialtyArrow,
+  .closingLink {
+    transition: none;
   }
 }
