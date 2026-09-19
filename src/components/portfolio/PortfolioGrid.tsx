@@ -1,7 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import {
   portfolioCategories,
@@ -13,51 +17,81 @@ import {
 
 import styles from "./PortfolioGrid.module.css";
 
-type ActiveCategory =
+export type ActiveCategory =
   | "todos"
   | PortfolioCategory;
 
-type ActiveCollection =
+export type ActiveCollection =
   | "todos"
   | PortfolioCollection;
+
+type PortfolioGridProps = {
+  activeCategory: ActiveCategory;
+  activeCollection: ActiveCollection;
+
+  onCategoryChange: (
+    category: ActiveCategory
+  ) => void;
+
+  onCollectionChange: (
+    collection: ActiveCollection
+  ) => void;
+};
 
 const INITIAL_ITEMS = 12;
 const ITEMS_PER_LOAD = 12;
 
-export default function PortfolioGrid() {
-  const [activeCategory, setActiveCategory] =
-    useState<ActiveCategory>("todos");
-
-  const [activeCollection, setActiveCollection] =
-    useState<ActiveCollection>("todos");
-
+export default function PortfolioGrid({
+  activeCategory,
+  activeCollection,
+  onCategoryChange,
+  onCollectionChange,
+}: PortfolioGridProps) {
   const [visibleCount, setVisibleCount] =
     useState(INITIAL_ITEMS);
 
   const [failedImages, setFailedImages] =
     useState<number[]>([]);
 
+  useEffect(() => {
+    setVisibleCount(INITIAL_ITEMS);
+  }, [
+    activeCategory,
+    activeCollection,
+  ]);
+
   const currentCollections =
     activeCategory === "todos"
       ? []
-      : portfolioCollections[activeCategory] ?? [];
+      : portfolioCollections[
+          activeCategory
+        ] ?? [];
 
   const filteredItems = useMemo(() => {
     let items = portfolioItems.filter(
-      (item) => !failedImages.includes(item.id)
+      (item) =>
+        !failedImages.includes(
+          item.id
+        )
     );
 
-    if (activeCategory !== "todos") {
+    if (
+      activeCategory !== "todos"
+    ) {
       items = items.filter(
         (item) =>
-          item.category === activeCategory
+          item.category ===
+          activeCategory
       );
     }
 
-    if (activeCollection !== "todos") {
+    if (
+      activeCollection !== "todos"
+    ) {
       items = items.filter(
         (item) =>
-          item.collection === activeCollection
+          item.collection ===
+          activeCollection
       );
     }
 
@@ -69,54 +103,63 @@ export default function PortfolioGrid() {
   ]);
 
   const visibleItems =
-    filteredItems.slice(0, visibleCount);
+    filteredItems.slice(
+      0,
+      visibleCount
+    );
 
   const hasMore =
-    visibleCount < filteredItems.length;
+    visibleCount <
+    filteredItems.length;
 
   function handleCategoryChange(
     category: ActiveCategory
   ) {
-    setActiveCategory(category);
-
-    // Sempre volta para "Todos"
-    // ao trocar a categoria principal.
-    setActiveCollection("todos");
-
-    setVisibleCount(INITIAL_ITEMS);
+    onCategoryChange(category);
   }
 
   function handleCollectionChange(
     collection: ActiveCollection
   ) {
-    setActiveCollection(collection);
-
-    setVisibleCount(INITIAL_ITEMS);
+    onCollectionChange(collection);
   }
 
   function handleLoadMore() {
     setVisibleCount((current) =>
       Math.min(
-        current + ITEMS_PER_LOAD,
+        current +
+          ITEMS_PER_LOAD,
         filteredItems.length
       )
     );
   }
 
-  function handleImageError(id: number) {
-    setFailedImages((current) => {
-      if (current.includes(id)) {
-        return current;
-      }
+  function handleImageError(
+    id: number
+  ) {
+    setFailedImages(
+      (current) => {
+        if (
+          current.includes(id)
+        ) {
+          return current;
+        }
 
-      return [...current, id];
-    });
+        return [
+          ...current,
+          id,
+        ];
+      }
+    );
   }
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.filterArea}>
-        {/* CATEGORIAS PRINCIPAIS */}
+      <div
+        className={
+          styles.filterArea
+        }
+      >
         <div
           className={styles.filters}
           aria-label="Filtrar portfólio por categoria"
@@ -129,14 +172,18 @@ export default function PortfolioGrid() {
 
               return (
                 <button
-                  key={category.value}
+                  key={
+                    category.value
+                  }
                   type="button"
                   className={`${styles.filterButton} ${
                     isActive
                       ? styles.active
                       : ""
                   }`}
-                  aria-pressed={isActive}
+                  aria-pressed={
+                    isActive
+                  }
                   onClick={() =>
                     handleCategoryChange(
                       category.value
@@ -150,12 +197,15 @@ export default function PortfolioGrid() {
           )}
         </div>
 
-        {/* SUBCATEGORIAS */}
-        {currentCollections.length > 0 && (
+        {currentCollections.length >
+          0 && (
           <div
-            className={styles.subfilters}
+            className={
+              styles.subfilters
+            }
             aria-label={`Filtrar ${
-              activeCategory === "ensaios"
+              activeCategory ===
+              "ensaios"
                 ? "ensaios"
                 : "religiosos"
             } por tipo`}
@@ -163,15 +213,19 @@ export default function PortfolioGrid() {
             <button
               type="button"
               className={`${styles.subfilterButton} ${
-                activeCollection === "todos"
+                activeCollection ===
+                "todos"
                   ? styles.subfilterActive
                   : ""
               }`}
               aria-pressed={
-                activeCollection === "todos"
+                activeCollection ===
+                "todos"
               }
               onClick={() =>
-                handleCollectionChange("todos")
+                handleCollectionChange(
+                  "todos"
+                )
               }
             >
               Todos
@@ -185,21 +239,27 @@ export default function PortfolioGrid() {
 
                 return (
                   <button
-                    key={collection.value}
+                    key={
+                      collection.value
+                    }
                     type="button"
                     className={`${styles.subfilterButton} ${
                       isActive
                         ? styles.subfilterActive
                         : ""
                     }`}
-                    aria-pressed={isActive}
+                    aria-pressed={
+                      isActive
+                    }
                     onClick={() =>
                       handleCollectionChange(
                         collection.value
                       )
                     }
                   >
-                    {collection.label}
+                    {
+                      collection.label
+                    }
                   </button>
                 );
               }
@@ -208,50 +268,71 @@ export default function PortfolioGrid() {
         )}
       </div>
 
-      {/* GALERIA */}
+      <div
+        className={styles.resultMeta}
+        aria-live="polite"
+      >
+        <span>
+          {filteredItems.length}
+        </span>
+
+        <span>
+          {filteredItems.length === 1
+            ? "fotografia"
+            : "fotografias"}
+        </span>
+      </div>
+
       {visibleItems.length > 0 ? (
         <div className={styles.grid}>
-          {visibleItems.map((item) => (
-            <figure
-              key={item.id}
-              className={styles.item}
-            >
-              <div
+          {visibleItems.map(
+            (item) => (
+              <figure
+                key={item.id}
                 className={
-                  styles.imageWrapper
+                  styles.item
                 }
               >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  sizes="
-                    (max-width: 700px) 50vw,
-                    (max-width: 1000px) 50vw,
-                    33vw
-                  "
-                  className={styles.image}
-                  onError={() =>
-                    handleImageError(
-                      item.id
-                    )
+                <div
+                  className={
+                    styles.imageWrapper
                   }
-                />
-              </div>
-            </figure>
-          ))}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    width={item.width}
+                    height={
+                      item.height
+                    }
+                    sizes="
+                      (max-width: 700px) 50vw,
+                      50vw
+                    "
+                    className={
+                      styles.image
+                    }
+                    onError={() =>
+                      handleImageError(
+                        item.id
+                      )
+                    }
+                  />
+                </div>
+              </figure>
+            )
+          )}
         </div>
       ) : (
         <div className={styles.empty}>
           <p>
-            Nenhuma fotografia disponível
-            nesta categoria.
+            Nenhuma fotografia
+            disponível nesta
+            categoria.
           </p>
         </div>
       )}
 
-      {/* VER MAIS */}
       {hasMore && (
         <div
           className={
@@ -260,8 +341,12 @@ export default function PortfolioGrid() {
         >
           <button
             type="button"
-            className={styles.loadMore}
-            onClick={handleLoadMore}
+            className={
+              styles.loadMore
+            }
+            onClick={
+              handleLoadMore
+            }
           >
             <span>
               Ver mais fotografias

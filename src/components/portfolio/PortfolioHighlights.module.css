@@ -1,0 +1,487 @@
+.section {
+  width: min(
+    calc(
+      100% -
+        (var(--container-padding) * 2)
+    ),
+    var(--container-width)
+  );
+
+  margin-inline: auto;
+
+  padding:
+    clamp(70px, 8vw, 120px)
+    0
+    clamp(100px, 10vw, 150px);
+}
+
+.header {
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+}
+
+.eyebrow {
+  flex-shrink: 0;
+
+  color: var(--color-primary);
+
+  font-size: 0.66rem;
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.headerLine {
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-border);
+}
+
+/* ========================================
+   STAGE
+======================================== */
+
+.stage {
+  width: 100%;
+}
+
+.media {
+  position: relative;
+
+  width: 100%;
+  height:
+    min(
+      72vh,
+      760px
+    );
+  min-height: 590px;
+
+  overflow: hidden;
+
+  background: #ded9d2;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  transition:
+    opacity 1100ms
+    cubic-bezier(
+      0.4,
+      0,
+      0.2,
+      1
+    );
+}
+
+.activeSlide {
+  opacity: 1;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.52) 0%,
+      rgba(0, 0, 0, 0.2) 42%,
+      rgba(0, 0, 0, 0.03) 74%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.22),
+      transparent 50%
+    );
+
+  pointer-events: none;
+}
+
+/* ========================================
+   CONTEÚDO
+======================================== */
+
+.slideContent {
+  position: absolute;
+
+  z-index: 2;
+
+  left:
+    clamp(
+      28px,
+      5vw,
+      72px
+    );
+
+  bottom:
+    clamp(
+      30px,
+      6vw,
+      72px
+    );
+
+  width:
+    min(
+      calc(100% - 56px),
+      510px
+    );
+
+  color: #ffffff;
+
+  animation:
+    contentIn
+    650ms
+    ease
+    both;
+}
+
+.slideNumber {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+}
+
+.slideTitle {
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      4rem,
+      7vw,
+      7rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing: -0.045em;
+}
+
+.slideDescription {
+  max-width: 40ch;
+
+  margin-top: 24px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.82
+    );
+
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.exploreButton {
+  width: 225px;
+
+  margin-top: 32px;
+  padding:
+    11px
+    0
+    13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.6
+    );
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    width 220ms ease,
+    opacity 180ms ease;
+}
+
+.exploreButton:hover {
+  width: 242px;
+
+  opacity: 0.75;
+}
+
+/* ========================================
+   CONTROLES
+======================================== */
+
+.controls {
+  min-height: 74px;
+
+  display: grid;
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap: 28px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+}
+
+.controlButton {
+  padding: 16px 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border: 0;
+
+  background: transparent;
+  color: var(--color-text);
+
+  font-size: 0.61rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.controlButton:first-child {
+  justify-self: start;
+}
+
+.controlButton:last-child {
+  justify-self: end;
+}
+
+.controlButton:hover {
+  gap: 17px;
+
+  color: var(--color-primary);
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--color-muted);
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+}
+
+.progressLine {
+  width: 46px;
+  height: 1px;
+
+  background:
+    var(--color-border);
+}
+
+@keyframes contentIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .media {
+    height: 68vh;
+    min-height: 540px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .section {
+    padding:
+      62px
+      0
+      90px;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .eyebrow {
+    font-size: 0.58rem;
+  }
+
+  .media {
+    height: auto;
+    min-height: 0;
+
+    aspect-ratio: 4 / 5;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.64) 0%,
+        rgba(0, 0, 0, 0.2) 56%,
+        rgba(0, 0, 0, 0.04) 100%
+      );
+  }
+
+  .slideContent {
+    left: 22px;
+    bottom: 26px;
+
+    width:
+      calc(100% - 44px);
+  }
+
+  .slideNumber {
+    margin-bottom: 12px;
+
+    font-size: 0.58rem;
+  }
+
+  .slideTitle {
+    font-size:
+      clamp(
+        3.2rem,
+        14vw,
+        4.8rem
+      );
+  }
+
+  .slideDescription {
+    max-width: 32ch;
+
+    margin-top: 16px;
+
+    font-size: 0.84rem;
+  }
+
+  .exploreButton {
+    width: 100%;
+
+    margin-top: 22px;
+
+    font-size: 0.56rem;
+  }
+
+  .exploreButton:hover {
+    width: 100%;
+  }
+
+  .controls {
+    min-height: 68px;
+
+    gap: 12px;
+  }
+
+  .controlButton {
+    gap: 7px;
+
+    font-size: 0;
+  }
+
+  .controlButton span[aria-hidden="true"] {
+    font-size: 1rem;
+  }
+
+  .progress {
+    gap: 8px;
+
+    font-size: 0.56rem;
+  }
+
+  .progressLine {
+    width: 28px;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .slide,
+  .exploreButton,
+  .controlButton {
+    transition: none;
+  }
+
+  .slideContent {
+    animation: none;
+  }
+}
