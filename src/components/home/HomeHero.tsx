@@ -29,11 +29,13 @@ export default function HomeHero() {
           </h1>
 
           <p className={styles.categories}>
-            Ensaios
+            Ensaios Femininos
             <span>·</span>
-            Famílias
+            Casamentos Intimistas
             <span>·</span>
-            Eventos
+            Eventos Religiosos 
+            <span>·</span>
+            Profissional
           </p>
 
           <Link

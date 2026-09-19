@@ -211,7 +211,7 @@
 
     gap: 6px 8px;
 
-    font-size: 0.54rem;
+    font-size: 0.40rem;
     letter-spacing: 0.16em;
   }
 
@@ -238,6 +238,6 @@
   }
 
   .categories {
-    font-size: 0.5rem;
+    font-size: 0.2rem;
   }
 }

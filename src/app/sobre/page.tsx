@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 const specialties = [
   {
     number: "01",
-    label: "Ensaios",
+    label: "Ensaios Femininos",
   },
   {
     number: "02",
-    label: "Famílias",
+    label: "Casamentos Intimistas",
   },
   {
     number: "03",
@@ -27,7 +27,7 @@ const specialties = [
   },
   {
     number: "04",
-    label: "Eventos",
+    label: "Eventos Religiosos",
   },
 ];
 
