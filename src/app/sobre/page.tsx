@@ -32,18 +32,22 @@ const specialties = [
   {
     number: "01",
     title: "Ensaios Femininos",
+    href: "/portfolio?categoria=ensaios#explore-portfolio",
   },
   {
     number: "02",
     title: "Casamentos Intimistas",
+    href: "/portfolio?categoria=religiosos&colecao=casamento#explore-portfolio",
   },
   {
     number: "03",
     title: "Profissional",
+    href: "/portfolio?categoria=profissional&colecao=profissional#explore-portfolio",
   },
   {
     number: "04",
     title: "Eventos Religiosos",
+    href: "/portfolio?categoria=religiosos#explore-portfolio",
   },
 ];
 
@@ -51,10 +55,6 @@ export default function SobrePage() {
   return (
     <>
       <main className={styles.page}>
-        {/* ========================================
-            ABERTURA
-        ======================================== */}
-
         <section className={styles.hero}>
           <div className={styles.container}>
             <div className={styles.heroContent}>
@@ -100,10 +100,6 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* ========================================
-            SOBRE
-        ======================================== */}
-
         <section className={styles.story}>
           <div className={styles.container}>
             <div className={styles.sectionLabel}>
@@ -143,10 +139,6 @@ export default function SobrePage() {
             </div>
           </div>
         </section>
-
-        {/* ========================================
-            JEITO DE FOTOGRAFAR
-        ======================================== */}
 
         <section className={styles.approach}>
           <div className={styles.approachContainer}>
@@ -210,10 +202,6 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* ========================================
-            ÁREAS DE ATUAÇÃO
-        ======================================== */}
-
         <section className={styles.specialties}>
           <div className={styles.container}>
             <div className={styles.specialtiesHeader}>
@@ -233,7 +221,7 @@ export default function SobrePage() {
               {specialties.map((specialty) => (
                 <Link
                   key={specialty.number}
-                  href="/portfolio#explore-portfolio"
+                  href={specialty.href}
                   className={styles.specialty}
                 >
                   <span className={styles.specialtyNumber}>
@@ -255,10 +243,6 @@ export default function SobrePage() {
             </div>
           </div>
         </section>
-
-        {/* ========================================
-            CTA
-        ======================================== */}
 
         <section className={styles.closing}>
           <div className={styles.closingContainer}>

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Footer from "@/components/layout/Footer";
 import PortfolioExperience from "@/components/portfolio/PortfolioExperience";
 
@@ -7,54 +9,30 @@ export default function PortfolioPage() {
   return (
     <>
       <main className={styles.page}>
-        <section
-          className={styles.intro}
-        >
-          <div
-            className={
-              styles.container
-            }
-          >
-            <span
-              className={
-                styles.eyebrow
-              }
-            >
+        <section className={styles.intro}>
+          <div className={styles.container}>
+            <span className={styles.eyebrow}>
               Portfólio
             </span>
 
-            <div
-              className={
-                styles.introContent
-              }
-            >
-              <h1
-                className={
-                  styles.title
-                }
-              >
+            <div className={styles.introContent}>
+              <h1 className={styles.title}>
                 Histórias
                 <br />
                 em imagens
               </h1>
 
-              <div
-                className={
-                  styles.introText
-                }
-              >
+              <div className={styles.introText}>
                 <p>
                   Pessoas, encontros,
                   gestos e celebrações
-                  registrados com
-                  atenção ao que
-                  acontece de verdade.
+                  registrados com atenção
+                  ao que acontece de
+                  verdade.
                 </p>
 
                 <span
-                  className={
-                    styles.line
-                  }
+                  className={styles.line}
                   aria-hidden="true"
                 />
               </div>
@@ -62,7 +40,9 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        <PortfolioExperience />
+        <Suspense fallback={null}>
+          <PortfolioExperience />
+        </Suspense>
       </main>
 
       <Footer />
