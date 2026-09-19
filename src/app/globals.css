@@ -204,36 +204,102 @@ canvas {
 }
 
 /* ========================================
-   SELEÇÃO
+   SKIP LINK
 ======================================== */
 
-::selection {
+.skip-link {
+  position: fixed;
+
+  top: 12px;
+  left: 12px;
+
+  z-index: 10000;
+
+  padding:
+    11px
+    16px;
+
+  border-radius: 3px;
+
   background: var(--color-primary);
   color: #ffffff;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+
+  transform: translateY(-180%);
+
+  transition: transform 160ms ease;
 }
 
-/* ========================================
-   ACESSIBILIDADE
-======================================== */
+.skip-link:focus {
+  transform: translateY(0);
+}
 
-:focus {
+/*
+  O container recebe foco quando usamos
+  "Pular para o conteúdo", mas não precisa
+  mostrar uma borda gigante em volta da página.
+*/
+#main-content:focus,
+#main-content:focus-visible {
   outline: none;
 }
 
+/* ========================================
+   ACESSIBILIDADE / FOCO
+======================================== */
+
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline:
+    2px solid var(--color-primary);
+
   outline-offset: 4px;
 }
 
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 button,
 summary {
   cursor: pointer;
+}
+
+/* ========================================
+   VISUALMENTE OCULTO
+======================================== */
+
+.sr-only {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+
+  white-space: nowrap !important;
+
+  border: 0 !important;
+}
+
+/* ========================================
+   SELEÇÃO
+======================================== */
+
+::selection {
+  background: var(--color-primary);
+  color: #ffffff;
 }
 
 /* ========================================
@@ -257,9 +323,13 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: rgba(154, 88, 66, 0.55);
+  background:
+    rgba(154, 88, 66, 0.55);
 
-  border: 2px solid var(--color-secondary);
+  border:
+    2px solid
+    var(--color-secondary);
+
   border-radius: 999px;
 }
 
@@ -274,11 +344,13 @@ body::-webkit-scrollbar-thumb:hover {
 @media (max-width: 900px) {
   :root {
     --container-padding: 24px;
-    --section-spacing: clamp(
-      72px,
-      10vw,
-      110px
-    );
+
+    --section-spacing:
+      clamp(
+        72px,
+        10vw,
+        110px
+      );
   }
 }
 
@@ -299,6 +371,15 @@ body::-webkit-scrollbar-thumb:hover {
   .eyebrow {
     font-size: 0.6rem;
   }
+
+  .skip-link {
+    top: 8px;
+    left: 8px;
+
+    padding:
+      10px
+      13px;
+  }
 }
 
 /* ========================================
@@ -315,9 +396,16 @@ body::-webkit-scrollbar-thumb:hover {
   *::after {
     scroll-behavior: auto !important;
 
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation-duration:
+      0.01ms !important;
 
-    transition-duration: 0.01ms !important;
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    transition-delay:
+      0ms !important;
   }
 }

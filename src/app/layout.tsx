@@ -39,9 +39,7 @@ const allura = Allura({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-
   themeColor: "#9A5842",
-
   colorScheme: "light",
 };
 
@@ -66,7 +64,6 @@ export const metadata: Metadata = {
   ],
 
   creator: siteConfig.name,
-
   publisher: siteConfig.name,
 
   category: "photography",
@@ -176,6 +173,13 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${cormorant.variable} ${allura.variable}`}
       >
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
+          Pular para o conteúdo
+        </a>
+
         <script
           id="structured-data"
           type="application/ld+json"
@@ -188,7 +192,12 @@ export default function RootLayout({
 
         <Header />
 
-        {children}
+        <div
+          id="main-content"
+          tabIndex={-1}
+        >
+          {children}
+        </div>
       </body>
     </html>
   );

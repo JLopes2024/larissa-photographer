@@ -51,12 +51,6 @@ export default function PortfolioPage() {
                 sizes="(max-width: 700px) 100vw, 480px"
                 className={styles.featuredImage}
               />
-
-              <p className={styles.handwritten}>
-                vida
-                <br />
-                em imagens
-              </p>
             </div>
           </div>
         </section>

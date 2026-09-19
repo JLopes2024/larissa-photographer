@@ -48,12 +48,6 @@ export default function SobrePage() {
                   className={styles.image}
                 />
               </div>
-
-              <p className={styles.handwritten}>
-                mais que fotos,
-                <br />
-                pessoas.
-              </p>
             </div>
 
             <div className={styles.content}>

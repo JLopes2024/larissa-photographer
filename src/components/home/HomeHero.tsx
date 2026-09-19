@@ -7,7 +7,7 @@ export default function HomeHero() {
   return (
     <section className={styles.hero}>
       <Image
-        src="/images/home/hero.jpg"
+        src="/images/home/hero.png"
         alt="Ensaio fotográfico por Larissa Photographer"
         fill
         priority
@@ -19,10 +19,7 @@ export default function HomeHero() {
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <p className={styles.eyebrow}>
-            Fotografia autoral
-          </p>
-
+   
           <h1 className={styles.title}>
             Fotos que
             <br />
