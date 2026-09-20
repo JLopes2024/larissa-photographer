@@ -28,26 +28,18 @@ const principles = [
   },
 ];
 
-const specialties = [
+const testimonials = [
   {
     number: "01",
-    title: "Ensaios Femininos",
-    href: "/portfolio?categoria=ensaios#explore-portfolio",
+    text: "Lari, eu me senti tão confortável fazendo o ensaio com você. Me guiou sobre todas as poses, me ajudou por completo. Já indiquei para algumas amigas e com certeza farei outros ensaios com você!! ❤️",
   },
   {
     number: "02",
-    title: "Casamentos Intimistas",
-    href: "/portfolio?categoria=religiosos&colecao=casamento#explore-portfolio",
+    text: "Apesar do dia chuvoso e algumas outras situações, você com a sua luz, dedicação, amor, seu olhar genuíno e a presença do Espírito Santo em suas palavras, tornou tudo mais leve! Conseguiu extrair de mim e transmitir nas fotos minha essência, tudo o que eu sou, tudo o que eu precisava ver. Você é um presente para mim e para todos que têm a oportunidade de te conhecer e ter por perto. Você é luz no mundo! ❤️",
   },
   {
     number: "03",
-    title: "Profissional",
-    href: "/portfolio?categoria=profissional&colecao=profissional#explore-portfolio",
-  },
-  {
-    number: "04",
-    title: "Eventos Religiosos",
-    href: "/portfolio?categoria=religiosos#explore-portfolio",
+    text: "Obrigada pela sensibilidade em capturar o que eu realmente gostaria nessa nova fase. 🥹",
   },
 ];
 
@@ -204,26 +196,33 @@ export default function SobrePage() {
           </div>
         </section>
 
-        <section className={styles.specialties}>
-          <div className={styles.container}>
-            <div className={styles.specialtiesHeader}>
-              <div className={styles.sectionLabel}>
-                <span>03</span>
-                <span>Depoimentos</span>
-              </div>
+        <div className={styles.testimonials}>
+  {testimonials.map((testimonial) => (
+    <blockquote
+      key={testimonial.number}
+      className={styles.testimonial}
+    >
+      <div className={styles.testimonialTop}>
+        <span className={styles.testimonialNumber}>
+          {testimonial.number}
+        </span>
 
-              <h2 className={styles.specialtiesTitle}>
-                Diferentes histórias.
-                <br />
-                O mesmo cuidado.
-              </h2>
-            </div>
+        <span
+          className={styles.quoteMark}
+          aria-hidden="true"
+        >
+          “
+        </span>
+      </div>
 
-            <div className={styles.depoimentos}>
-              <p>Aqui vai ter os depoimentos</p>
-            </div>
-          </div>
-        </section>
+      <p>{testimonial.text}</p>
+
+      <footer className={styles.testimonialFooter}>
+        Cliente Larissa Photographer
+      </footer>
+    </blockquote>
+  ))}
+</div>
 
         <section className={styles.closing}>
           <div className={styles.closingContainer}>
@@ -250,7 +249,7 @@ export default function SobrePage() {
                   href="/contato"
                   className={styles.closingLink}
                 >
-                  <span>Conversar com Larissa</span>
+                  <span>Conversar com  Larissa</span>
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>

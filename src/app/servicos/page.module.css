@@ -600,13 +600,12 @@
 /* ========================================
    CTA FINAL
 ======================================== */
-
 .finalCta {
   padding:
     clamp(100px, 12vw, 180px)
     0;
 
-  background: var(--color-dark);
+  background: var(--color-primary);
   color: #ffffff;
 
   text-align: center;
@@ -619,7 +618,8 @@
 }
 
 .finalCta .sectionLabel {
-  color: var(--color-detail);
+  color:
+    rgba(255, 255, 255, 0.72);
 }
 
 .finalCta h2 {
@@ -642,7 +642,7 @@
 }
 
 .finalCta h2 em {
-  color: var(--color-detail);
+  color: var(--color-secondary);
 
   font-weight: 400;
 }
@@ -653,7 +653,7 @@
   margin-top: 28px;
 
   color:
-    rgba(255, 255, 255, 0.62);
+    rgba(255, 255, 255, 0.76);
 
   font-size: 0.95rem;
   line-height: 1.8;
@@ -673,7 +673,9 @@
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.5);
+    rgba(255, 255, 255, 0.7);
+
+  color: #ffffff;
 
   font-size: 0.64rem;
   font-weight: 600;
@@ -691,7 +693,7 @@
   gap: 34px;
 
   background: #ffffff;
-  color: var(--color-dark);
+  color: var(--color-primary);
 }
 
 /* ========================================

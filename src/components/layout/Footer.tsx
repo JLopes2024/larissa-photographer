@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
-import { navigation } from "@/data/navigation";
+import Link from "next/link";
+
 import { siteConfig } from "@/data/site";
 
 import styles from "./Footer.module.css";
@@ -11,92 +11,63 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <div className={styles.brand}>
-            <Link
-              href="/"
-              className={styles.brandName}
-              aria-label="Larissa Photographer — Início"
-            >
-              <Image
+        <div className={styles.main}>
+          <Link
+            href="/"
+            className={styles.logo}
+            aria-label="Larissa Photographer — Início"
+          >
+            <Image
               src="/images/brand/logo.png"
               alt=""
-              width={180}
-              height={70}
-              priority
+              width={220}
+              height={86}
               className={styles.logoImage}
             />
-            </Link>
+          </Link>
 
-            <p>
-              Histórias, encontros e afetos
-              <br />
-              guardados em imagens.
-            </p>
-          </div>
-
-          <nav
-            className={styles.navigation}
-            aria-label="Navegação do rodapé"
+          <div
+            className={styles.links}
+            aria-label="Contato"
           >
-            <span className={styles.label}>
-              Navegação
-            </span>
+            <a
+              href={siteConfig.instagram.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram
+              <span aria-hidden="true">
+                ↗
+              </span>
+            </a>
 
-            <div className={styles.links}>
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
+            <a
+              href={siteConfig.whatsapp.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp
+              <span aria-hidden="true">
+                ↗
+              </span>
+            </a>
 
-          <div className={styles.contact}>
-            <span className={styles.label}>
+            <Link href="/contato">
               Contato
-            </span>
-
-            <div className={styles.contactLinks}>
-              <a
-                href={siteConfig.whatsapp.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                WhatsApp
-                <span aria-hidden="true">↗</span>
-              </a>
-
-              <a href={`mailto:${siteConfig.email}`}>
-                E-mail
-                <span aria-hidden="true">↗</span>
-              </a>
-
-              <a
-                href={siteConfig.instagram.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Instagram
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
+              <span aria-hidden="true">
+                →
+              </span>
+            </Link>
           </div>
         </div>
-
 
         <div className={styles.bottom}>
           <p>
             © {year} {siteConfig.name}
           </p>
 
-          <p>{siteConfig.location}</p>
-
           <p>
-            Todos os direitos reservados.
+            {siteConfig.location}
           </p>
         </div>
       </div>

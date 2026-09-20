@@ -1,197 +1,149 @@
 .footer {
-  position: relative;
-
-  overflow: hidden;
-
-  padding:
-    clamp(70px, 8vw, 120px)
-    0
-    28px;
-
   background: var(--color-dark);
   color: #ffffff;
 }
 
 .container {
   width: min(
-    calc(100% - (var(--container-padding) * 2)),
+    calc(
+      100% -
+        (var(--container-padding) * 2)
+    ),
     var(--container-width)
   );
 
   margin-inline: auto;
+
+  padding:
+    clamp(52px, 6vw, 78px)
+    0
+    24px;
 }
 
 /* ========================================
-   TOPO
+   CONTEÚDO PRINCIPAL
 ======================================== */
 
-.top {
-  display: grid;
-
-  grid-template-columns:
-    minmax(280px, 1.2fr)
-    minmax(160px, 0.45fr)
-    minmax(200px, 0.55fr);
-
-  gap: clamp(50px, 8vw, 120px);
-
-  align-items: start;
-}
-
-.brandName {
-  width: fit-content;
+.main {
+  min-height: 120px;
 
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: clamp(3rem, 4.2vw, 4.8rem);
-  font-weight: 400;
+  gap: 60px;
 
-  line-height: 0.72;
-  letter-spacing: -0.04em;
-}
-
-.brandName span {
-  margin-top: 8px;
-
-  color: var(--color-detail);
-
-  font-family: var(--font-script), cursive;
-  font-size: 0.68em;
-  font-weight: 400;
-
-  line-height: 1;
-
-  transform: translateX(38px) rotate(-4deg);
-}
-
-.brand p {
-  margin-top: 34px;
-
-  color: rgba(255, 255, 255, 0.55);
-
-  font-size: 0.88rem;
-  line-height: 1.8;
-}
-
-.label {
-  display: block;
-
-  margin-bottom: 22px;
-
-  color: var(--color-detail);
-
-  font-size: 0.58rem;
-  font-weight: 600;
-
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  padding-bottom:
+    clamp(54px, 7vw, 90px);
 }
 
 /* ========================================
-   NAVEGAÇÃO
+   LOGO
+======================================== */
+
+.logo {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoImage {
+  width: auto;
+  height: 64px;
+
+  object-fit: contain;
+
+  filter:
+    brightness(0)
+    invert(1);
+
+  opacity: 0.96;
+}
+
+/* ========================================
+   LINKS
 ======================================== */
 
 .links {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 
-  align-items: flex-start;
-
-  gap: 13px;
+  gap:
+    18px
+    clamp(24px, 3vw, 42px);
 }
 
 .links a {
   position: relative;
 
-  color: rgba(255, 255, 255, 0.72);
+  display: inline-flex;
+  align-items: center;
 
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: 1.4rem;
+  gap: 7px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.66
+    );
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 
   transition:
-    color 180ms ease,
+    color 180ms ease;
+}
+
+.links a::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+  bottom: -6px;
+  left: 0;
+
+  height: 1px;
+
+  background:
+    var(--color-detail);
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition:
     transform 180ms ease;
 }
 
 .links a:hover {
   color: #ffffff;
-
-  transform: translateX(4px);
 }
 
-/* ========================================
-   CONTATO
-======================================== */
-
-.contactLinks {
-  display: flex;
-  flex-direction: column;
+.links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-.contactLinks a {
-  padding: 13px 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.14);
-
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 0.76rem;
-  font-weight: 500;
-
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.links a span {
+  font-size: 0.8rem;
 
   transition:
-    color 180ms ease,
-    padding-left 180ms ease;
+    transform 180ms ease;
 }
 
-.contactLinks a:first-child {
-  border-top:
-    1px solid rgba(255, 255, 255, 0.14);
-}
-
-.contactLinks a:hover {
-  padding-left: 6px;
-
-  color: var(--color-detail);
-}
-
-/* ========================================
-   FRASE
-======================================== */
-
-.phrase {
-  margin:
-    clamp(70px, 9vw, 130px)
-    0
-    clamp(65px, 8vw, 110px);
-
-  display: flex;
-  justify-content: flex-end;
-}
-
-.phrase p {
-  color: var(--color-detail);
-
-  font-family: var(--font-script), cursive;
-  font-size: clamp(3.4rem, 6vw, 6.7rem);
-  font-weight: 400;
-
-  line-height: 0.66;
-
-  text-align: right;
-
-  transform: rotate(-4deg);
+.links a:hover span {
+  transform:
+    translate(
+      3px,
+      -2px
+    );
 }
 
 /* ========================================
@@ -199,7 +151,7 @@
 ======================================== */
 
 .bottom {
-  padding-top: 22px;
+  padding-top: 20px;
 
   display: flex;
   align-items: center;
@@ -208,13 +160,25 @@
   gap: 30px;
 
   border-top:
-    1px solid rgba(255, 255, 255, 0.14);
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.1
+    );
 }
 
 .bottom p {
-  color: rgba(255, 255, 255, 0.38);
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.3
+    );
 
-  font-size: 0.57rem;
+  font-size: 0.52rem;
   font-weight: 500;
 
   letter-spacing: 0.16em;
@@ -222,69 +186,79 @@
 }
 
 /* ========================================
-   TABLET
-======================================== */
-
-@media (max-width: 900px) {
-  .top {
-    grid-template-columns:
-      1fr
-      1fr;
-
-    row-gap: 60px;
-  }
-
-  .brand {
-    grid-column: 1 / -1;
-  }
-}
-
-/* ========================================
    MOBILE
 ======================================== */
 
-@media (max-width: 600px) {
-  .footer {
+@media (max-width: 700px) {
+  .container {
     padding:
-      70px
+      44px
       0
-      24px;
+      22px;
   }
 
-  .top {
-    grid-template-columns: 1fr;
+  .main {
+    min-height: 0;
 
-    gap: 48px;
+    flex-direction: column;
+
+    gap: 42px;
+
+    padding-bottom: 52px;
   }
 
-  .brand {
-    grid-column: auto;
-  }
-
-  .brandName {
-    font-size: 3.6rem;
-  }
-
-  .brandName span {
-    transform: translateX(28px) rotate(-4deg);
-  }
-
-  .brand p {
-    margin-top: 30px;
+  .logoImage {
+    height: 54px;
   }
 
   .links {
-    gap: 11px;
+    width: 100%;
+
+    justify-content: space-between;
+
+    gap: 18px;
   }
 
   .links a {
-    font-size: 1.5rem;
+    font-size: 0.56rem;
   }
 
   .bottom {
     flex-direction: column;
     align-items: flex-start;
 
-    gap: 10px;
+    gap: 8px;
+  }
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 390px) {
+  .logoImage {
+    height: 48px;
+  }
+
+  .links {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 16px;
+  }
+}
+
+/* ========================================
+   REDUZIR MOVIMENTO
+======================================== */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .links a,
+  .links a::after,
+  .links a span {
+    transition: none;
   }
 }

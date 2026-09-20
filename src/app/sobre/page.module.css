@@ -535,44 +535,178 @@
 }
 
 /* ========================================
-   ESPECIALIDADES
+DEPOIMENTOS
+======================================== */
+/* ========================================
+   DEPOIMENTOS
 ======================================== */
 
-.specialties {
-  padding:
-    clamp(
-      100px,
-      11vw,
-      170px
-    )
-    0;
-}
-
-.specialtiesHeader {
+.testimonials {
   display: grid;
 
   grid-template-columns:
-    minmax(180px, 0.45fr)
-    minmax(0, 1fr);
+    repeat(12, minmax(0, 1fr));
 
   align-items: start;
 
   gap:
     clamp(
-      50px,
+      26px,
+      4vw,
+      58px
+    );
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.testimonial {
+  position: relative;
+
+  margin: 0;
+
+  padding:
+    clamp(
+      30px,
+      4vw,
+      52px
+    );
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-background);
+
+  color:
+    var(--color-text);
+}
+
+/*
+  Primeiro depoimento:
+  maior e mais editorial.
+*/
+.testimonial:nth-child(1) {
+  grid-column: 1 / span 7;
+}
+
+/*
+  Segundo:
+  mais estreito e deslocado.
+*/
+.testimonial:nth-child(2) {
+  grid-column: 8 / span 5;
+
+  margin-top:
+    clamp(
+      70px,
       9vw,
       130px
     );
 
-  margin-bottom:
+  background:
+    var(--color-primary);
+
+  color: #ffffff;
+
+  border-color:
+    var(--color-primary);
+}
+
+/*
+  Terceiro:
+  menor, como fechamento.
+*/
+.testimonial:nth-child(3) {
+  grid-column: 3 / span 6;
+
+  margin-top:
     clamp(
-      70px,
-      8vw,
-      110px
+      10px,
+      3vw,
+      40px
     );
 }
 
-.specialtiesTitle {
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.testimonialTop {
+  margin-bottom:
+    clamp(
+      34px,
+      5vw,
+      64px
+    );
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.testimonialNumber {
+  color:
+    var(--color-primary);
+
+  font-size: 0.56rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+}
+
+.testimonial:nth-child(2)
+.testimonialNumber {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.66
+    );
+}
+
+/* ========================================
+   ASPAS
+======================================== */
+
+.quoteMark {
+  height: 42px;
+
+  color:
+    var(--color-detail);
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size: 5.5rem;
+  font-weight: 400;
+
+  line-height: 0.75;
+}
+
+.testimonial:nth-child(2)
+.quoteMark {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+}
+
+/* ========================================
+   TEXTO
+======================================== */
+
+.testimonial p {
   font-family:
     var(--font-editorial),
     Georgia,
@@ -580,95 +714,134 @@
 
   font-size:
     clamp(
-      4rem,
-      6vw,
-      6.6rem
+      1.65rem,
+      2.4vw,
+      2.8rem
     );
 
   font-weight: 400;
 
-  line-height: 0.85;
-  letter-spacing: -0.045em;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
 }
 
-.specialtiesList {
+.testimonial:nth-child(2) p {
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      1.45rem,
+      2vw,
+      2.25rem
+    );
+}
+
+.testimonial:nth-child(3) p {
+  font-size:
+    clamp(
+      1.8rem,
+      2.8vw,
+      3.1rem
+    );
+}
+
+/* ========================================
+   ASSINATURA
+======================================== */
+
+.testimonialFooter {
+  margin-top:
+    clamp(
+      34px,
+      5vw,
+      58px
+    );
+
+  padding-top: 16px;
+
   border-top:
     1px solid
     var(--color-border);
-}
 
-.specialty {
-  min-height: 118px;
+  color:
+    var(--color-muted);
 
-  display: grid;
-
-  grid-template-columns:
-    70px
-    minmax(0, 1fr)
-    auto;
-
-  align-items: center;
-
-  gap: 20px;
-
-  border-bottom:
-    1px solid
-    var(--color-border);
-
-  color: var(--color-text);
-
-  transition:
-    padding-left 260ms ease,
-    color 180ms ease;
-}
-
-.specialty:hover {
-  padding-left: 16px;
-
-  color: var(--color-primary);
-}
-
-.specialtyNumber {
-  color: var(--color-muted);
-
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   font-weight: 600;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-.specialtyTitle {
-  font-family:
-    var(--font-editorial),
-    Georgia,
-    serif;
-
-  font-size:
-    clamp(
-      2.3rem,
-      4vw,
-      4.5rem
+.testimonial:nth-child(2)
+.testimonialFooter {
+  border-color:
+    rgba(
+      255,
+      255,
+      255,
+      0.24
     );
 
-  font-weight: 400;
-
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-
-.specialtyArrow {
-  font-size: 1.1rem;
-
-  transition:
-    transform 220ms ease;
-}
-
-.specialty:hover .specialtyArrow {
-  transform:
-    translate(
-      5px,
-      -5px
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.64
     );
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .testimonials {
+    display: block;
+  }
+
+  .testimonial,
+  .testimonial:nth-child(1),
+  .testimonial:nth-child(2),
+  .testimonial:nth-child(3) {
+    width: 100%;
+
+    margin:
+      0
+      0
+      18px;
+  }
+
+  .testimonial {
+    padding:
+      28px
+      24px
+      30px;
+  }
+
+  .testimonialTop {
+    margin-bottom: 34px;
+  }
+
+  .quoteMark {
+    font-size: 4.5rem;
+  }
+
+  .testimonial p,
+  .testimonial:nth-child(2) p,
+  .testimonial:nth-child(3) p {
+    font-size:
+      clamp(
+        1.55rem,
+        7vw,
+        2.15rem
+      );
+  }
+
+  .testimonialFooter {
+    margin-top: 34px;
+  }
 }
 
 /* ========================================

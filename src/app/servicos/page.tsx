@@ -82,12 +82,6 @@ const faqs = [
     answer:
       "As condições e formas de pagamento são informadas no orçamento, de acordo com o serviço e a cobertura escolhida.",
   },
-  {
-    question:
-      "A cobertura funciona em ambiente escuro?",
-    answer:
-      "Sim. A cobertura é planejada de acordo com as condições de iluminação do evento e o equipamento necessário para cada situação.",
-  },
 ];
 
 export default function ServicosPage() {
