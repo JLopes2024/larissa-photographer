@@ -29,10 +29,6 @@ export type PortfolioItem = {
 
 export const portfolioCategories = [
   {
-    label: "Todos",
-    value: "todos",
-  },
-  {
     label: "Ensaios",
     value: "ensaios",
   },
@@ -67,10 +63,6 @@ export const portfolioCollections: Partial<
     {
       label: "Autoral",
       value: "autoral",
-    },
-    {
-      label: "Estúdio",
-      value: "estudio",
     },
   ],
 

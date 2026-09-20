@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import { navigation } from "@/data/navigation";
 import { siteConfig } from "@/data/site";
 
@@ -18,8 +18,14 @@ export default function Footer() {
               className={styles.brandName}
               aria-label="Larissa Photographer — Início"
             >
-              Larissa
-              <span>Photographer</span>
+              <Image
+              src="/images/brand/logo.png"
+              alt=""
+              width={180}
+              height={70}
+              priority
+              className={styles.logoImage}
+            />
             </Link>
 
             <p>
