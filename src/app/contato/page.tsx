@@ -36,31 +36,7 @@ export default function ContatoPage() {
             </div>
 
             <div className={styles.details}>
-              <a
-                href={siteConfig.whatsapp.url}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.contactItem}
-              >
-                <div>
-                  <span className={styles.label}>
-                    WhatsApp
-                  </span>
-
-                  <p className={styles.value}>
-                    {siteConfig.whatsapp.display}
-                  </p>
-                </div>
-
-                <span
-                  className={styles.arrow}
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </a>
-
-              <a
+                          <a
                 href={`mailto:${siteConfig.email}`}
                 className={styles.contactItem}
               >

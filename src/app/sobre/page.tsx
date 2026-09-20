@@ -198,6 +198,8 @@ export default function SobrePage() {
                   </article>
                 ))}
               </div>
+
+              
             </div>
           </div>
         </section>
@@ -207,7 +209,7 @@ export default function SobrePage() {
             <div className={styles.specialtiesHeader}>
               <div className={styles.sectionLabel}>
                 <span>03</span>
-                <span>O que fotografo</span>
+                <span>Depoimentos</span>
               </div>
 
               <h2 className={styles.specialtiesTitle}>
@@ -217,29 +219,8 @@ export default function SobrePage() {
               </h2>
             </div>
 
-            <div className={styles.specialtiesList}>
-              {specialties.map((specialty) => (
-                <Link
-                  key={specialty.number}
-                  href={specialty.href}
-                  className={styles.specialty}
-                >
-                  <span className={styles.specialtyNumber}>
-                    {specialty.number}
-                  </span>
-
-                  <span className={styles.specialtyTitle}>
-                    {specialty.title}
-                  </span>
-
-                  <span
-                    className={styles.specialtyArrow}
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </span>
-                </Link>
-              ))}
+            <div className={styles.depoimentos}>
+              <p>Aqui vai ter os depoimentos</p>
             </div>
           </div>
         </section>
@@ -269,7 +250,7 @@ export default function SobrePage() {
                   href="/contato"
                   className={styles.closingLink}
                 >
-                  <span>Conversar com a Larissa</span>
+                  <span>Conversar com Larissa</span>
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
