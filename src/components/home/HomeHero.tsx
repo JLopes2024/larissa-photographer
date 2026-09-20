@@ -38,6 +38,11 @@ const slides = [
     desktopPosition: "50% 34%",
     mobilePosition: "50% 50%",
   },
+   {
+    src: "/images/home/hero5.jpg",
+    desktopPosition: "50% 34%",
+    mobilePosition: "50% 50%",
+  },
 ] as const;
 
 export default function HomeHero() {
