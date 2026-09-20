@@ -210,26 +210,6 @@ export default function PortfolioGrid({
                 : "religiosos"
             } por tipo`}
           >
-            <button
-              type="button"
-              className={`${styles.subfilterButton} ${
-                activeCollection ===
-                "todos"
-                  ? styles.subfilterActive
-                  : ""
-              }`}
-              aria-pressed={
-                activeCollection ===
-                "todos"
-              }
-              onClick={() =>
-                handleCollectionChange(
-                  "todos"
-                )
-              }
-            >
-              Todos
-            </button>
 
             {currentCollections.map(
               (collection) => {

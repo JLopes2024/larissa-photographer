@@ -7,7 +7,6 @@ export type PortfolioCollection =
   | "aniversario"
   | "ar-livre"
   | "autoral"
-  | "estudio"
   | "profissional"
   | "batizado"
   | "casamento"
@@ -137,17 +136,6 @@ export const portfolioItems: PortfolioItem[] = [
     category: "religiosos",
     collection: "batizado",
   },
-
-  {
-    id: 6,
-    src: "/images/ensaios/estudio/estudio1.jpg",
-    alt: "Ensaio fotográfico em estúdio",
-    width: 1200,
-    height: 1662,
-    category: "ensaios",
-    collection: "estudio",
-  },
-
   {
     id: 7,
     src: "/images/ensaios/aniversario/bolo13.jpg",
@@ -219,17 +207,6 @@ export const portfolioItems: PortfolioItem[] = [
     collection: "batizado",
     cover: true,
   },
-
-  {
-    id: 14,
-    src: "/images/ensaios/estudio/studio03.jpg",
-    alt: "Ensaio fotográfico em estúdio",
-    width: 1200,
-    height: 1800,
-    category: "ensaios",
-    collection: "estudio",
-  },
-
   {
     id: 15,
     src: "/images/ensaios/aniversario/bolo03.jpg",
@@ -301,16 +278,6 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 22,
-    src: "/images/ensaios/estudio/studio06.jpg",
-    alt: "Ensaio fotográfico em estúdio",
-    width: 1200,
-    height: 1709,
-    category: "ensaios",
-    collection: "estudio",
-  },
-
-  {
     id: 23,
     src: "/images/ensaios/aniversario/bolo12.jpg",
     alt: "Ensaio fotográfico de aniversário",
@@ -379,17 +346,6 @@ export const portfolioItems: PortfolioItem[] = [
     category: "religiosos",
     collection: "batizado",
   },
-
-  {
-    id: 30,
-    src: "/images/ensaios/estudio/studio08.jpg",
-    alt: "Ensaio fotográfico em estúdio",
-    width: 1200,
-    height: 1800,
-    category: "ensaios",
-    collection: "estudio",
-  },
-
   {
     id: 31,
     src: "/images/ensaios/aniversario/bolo14.jpg",

@@ -44,7 +44,6 @@ function isValidCollection(
     value === "aniversario" ||
     value === "ar-livre" ||
     value === "autoral" ||
-    value === "estudio" ||
     value === "profissional" ||
     value === "batizado" ||
     value === "casamento" ||
@@ -64,7 +63,6 @@ function collectionBelongsToCategory(
       "aniversario",
       "ar-livre",
       "autoral",
-      "estudio",
     ],
 
     profissional: [
