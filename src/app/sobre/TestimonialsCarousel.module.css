@@ -1,0 +1,612 @@
+.carousel {
+  position: relative;
+
+  width: 100%;
+}
+
+/* ========================================
+   TOPO
+======================================== */
+
+.carouselTop {
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  color: var(--color-muted);
+
+  font-size: 0.54rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+}
+
+.counterLine {
+  width: 36px;
+  height: 1px;
+
+  background:
+    var(--color-border);
+}
+
+/*
+  Escondido em desktop e tablet.
+  Aparece somente no mobile.
+*/
+.hint {
+  display: none;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: var(--color-muted);
+
+  font-size: 0.53rem;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   VIEWPORT
+======================================== */
+
+.viewport {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type:
+    x mandatory;
+
+  scrollbar-width: none;
+
+  overscroll-behavior-inline:
+    contain;
+
+  -webkit-overflow-scrolling:
+    touch;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  display: flex;
+  align-items: stretch;
+
+  gap:
+    clamp(
+      16px,
+      2vw,
+      26px
+    );
+
+  /*
+    Espaço extra para o último card
+    também conseguir alinhar corretamente.
+  */
+  padding-right: 28%;
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.card {
+  position: relative;
+
+  flex:
+    0 0
+    clamp(
+      520px,
+      68%,
+      820px
+    );
+
+  min-height:
+    clamp(
+      360px,
+      38vw,
+      470px
+    );
+
+  margin: 0;
+
+  padding:
+    clamp(
+      34px,
+      4vw,
+      52px
+    );
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  scroll-snap-align: start;
+
+  border:
+    1px solid
+    rgba(
+      46,
+      46,
+      46,
+      0.1
+    );
+
+  border-top:
+    3px solid
+    var(--color-primary);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.38
+    );
+
+  color:
+    var(--color-text);
+
+  opacity: 0.58;
+
+  transform:
+    scale(0.985);
+
+  transition:
+    opacity 450ms ease,
+    transform 550ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+    background 300ms ease,
+    border-color 300ms ease;
+}
+
+.card:nth-child(even) {
+  border-top-color:
+    var(--color-detail);
+}
+
+.cardActive {
+  opacity: 1;
+
+  transform:
+    scale(1);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+}
+
+/* ========================================
+   ASPAS DE FUNDO
+======================================== */
+
+.quoteBg {
+  position: absolute;
+
+  top: 2px;
+  right: 20px;
+
+  z-index: 0;
+
+  color:
+    rgba(
+      154,
+      88,
+      66,
+      0.06
+    );
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      8rem,
+      12vw,
+      13rem
+    );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.card:nth-child(even)
+.quoteBg {
+  color:
+    rgba(
+      206,
+      127,
+      136,
+      0.09
+    );
+}
+
+/* ========================================
+   CABEÇALHO DO CARD
+======================================== */
+
+.cardHeader {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.number {
+  color:
+    var(--color-primary);
+
+  font-size: 0.54rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+}
+
+.cardLabel {
+  color:
+    var(--color-muted);
+
+  font-size: 0.5rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   TEXTO
+======================================== */
+
+.text {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 40ch;
+
+  margin-top:
+    clamp(
+      44px,
+      6vw,
+      72px
+    );
+
+  color:
+    var(--color-text);
+
+  font-family:
+    var(--font-editorial),
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.45rem,
+      2.2vw,
+      2.45rem
+    );
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1.24;
+
+  letter-spacing:
+    -0.018em;
+}
+
+/* ========================================
+   AUTOR
+======================================== */
+
+.author {
+  position: relative;
+
+  z-index: 1;
+
+  margin-top: auto;
+
+  padding-top: 28px;
+
+  border-top:
+    1px solid
+    var(--color-border);
+
+  color:
+    var(--color-muted);
+
+  font-size: 0.49rem;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+.carouselBottom {
+  margin-top: 24px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(120px, 1fr);
+
+  align-items: center;
+
+  gap: 28px;
+}
+
+/* ========================================
+   PAGINAÇÃO
+======================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.dot {
+  width: 20px;
+  height: 26px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.dot span {
+  width: 5px;
+  height: 5px;
+
+  display: block;
+
+  border:
+    1px solid
+    var(--color-primary);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.dotActive span {
+  background:
+    var(--color-primary);
+
+  transform:
+    scale(1.35);
+}
+
+/* ========================================
+   PROGRESSO DO AUTOPLAY
+======================================== */
+
+.progress {
+  position: relative;
+
+  width: 100%;
+  height: 1px;
+
+  overflow: hidden;
+
+  background:
+    var(--color-border);
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0;
+
+  background:
+    var(--color-primary);
+
+  transform-origin: left;
+
+  animation:
+    testimonialProgress
+    6000ms
+    linear
+    forwards;
+}
+
+.progressPaused {
+  animation-play-state:
+    paused;
+}
+
+@keyframes testimonialProgress {
+  from {
+    transform:
+      scaleX(0);
+  }
+
+  to {
+    transform:
+      scaleX(1);
+  }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .card {
+    flex-basis: 76%;
+
+    min-height: 420px;
+  }
+
+  .track {
+    padding-right: 22%;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .carouselTop {
+    margin-bottom: 18px;
+  }
+
+  .counter {
+    font-size: 0.5rem;
+  }
+
+  .counterLine {
+    width: 26px;
+  }
+
+  .hint {
+    display: flex;
+
+    font-size: 0.48rem;
+  }
+
+  .track {
+    gap: 12px;
+
+    padding-right: 14%;
+  }
+
+  .card {
+    flex-basis: 86%;
+
+    min-height: 390px;
+
+    padding:
+      28px
+      24px
+      30px;
+  }
+
+  .quoteBg {
+    top: 2px;
+    right: 12px;
+
+    font-size: 8rem;
+  }
+
+  .text {
+    max-width: 100%;
+
+    margin-top: 46px;
+
+    font-size:
+      clamp(
+        1.4rem,
+        6.5vw,
+        2rem
+      );
+
+    line-height: 1.28;
+  }
+
+  .author {
+    padding-top: 24px;
+  }
+
+  .carouselBottom {
+    margin-top: 18px;
+
+    gap: 18px;
+  }
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 390px) {
+  .hint span:first-child {
+    display: none;
+  }
+
+  .card {
+    flex-basis: 88%;
+
+    min-height: 380px;
+  }
+}
+
+/* ========================================
+   REDUÇÃO DE MOVIMENTO
+======================================== */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .card,
+  .dot span {
+    transition: none;
+  }
+
+  .progress {
+    display: none;
+  }
+
+  .viewport {
+    scroll-behavior: auto;
+  }
+}
