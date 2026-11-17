@@ -8,6 +8,10 @@ export const navigation = [
     href: "/portfolio",
   },
   {
+    label: "Autoral",
+    href: "/autoral",
+  },
+  {
     label: "Sobre",
     href: "/sobre",
   },

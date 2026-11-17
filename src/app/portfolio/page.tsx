@@ -24,11 +24,8 @@ export default function PortfolioPage() {
 
               <div className={styles.introText}>
                 <p>
-                  Pessoas, encontros,
-                  gestos e celebrações
-                  registrados com atenção
-                  ao que acontece de
-                  verdade.
+                  Momentos registrados com atenção e sensibilidade,
+                  ultrapassando o tempo e o espaço.
                 </p>
 
                 <span

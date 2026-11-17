@@ -1,16 +1,10 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 
+import TestimonialsCarousel from "@/app/sobre/TestimonialsCarousel";
 import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/data/site";
 
 import styles from "./page.module.css";
-
-export const metadata: Metadata = {
-  title: "Serviços",
-  description:
-    "Conheça as experiências fotográficas oferecidas pela Larissa Photographer: ensaios, casais, aniversários, fotografia profissional, eventos, cerimônias religiosas e cobertura com Polaroid.",
-};
 
 const services = [
   {
@@ -39,12 +33,6 @@ const services = [
   },
   {
     number: "05",
-    title: "Cobertura fotográfica de eventos",
-    description:
-      "Registros atentos e espontâneos para preservar encontros, celebrações e momentos importantes.",
-  },
-  {
-    number: "06",
     title: "Eventos religiosos",
     description:
       "Batizados, casamentos, eucaristias e celebrações registradas com respeito, delicadeza e sensibilidade.",
@@ -53,32 +41,27 @@ const services = [
 
 const faqs = [
   {
-    question:
-      "As fotos da Polaroid são reveladas na hora?",
+    question: "As fotos da Polaroid são reveladas na hora?",
     answer:
       "Sim. A fotografia é impressa no momento e a imagem aparece gradualmente nos minutos seguintes ao registro.",
   },
   {
-    question:
-      "Como os convidados participam?",
+    question: "Como os convidados participam?",
     answer:
       "A experiência pode ser integrada ao evento para que os convidados sejam fotografados e levem consigo uma lembrança física daquele momento.",
   },
   {
-    question:
-      "O álbum pode seguir a identidade do evento?",
+    question: "O álbum pode seguir a identidade do evento?",
     answer:
       "Sim. A apresentação pode ser planejada para conversar com a estética e a identidade visual da celebração.",
   },
   {
-    question:
-      "Como funciona a reserva?",
+    question: "Como funciona a reserva?",
     answer:
       "A data é reservada após o alinhamento dos detalhes do evento e a confirmação das condições combinadas para a contratação.",
   },
   {
-    question:
-      "Quais são as formas de pagamento?",
+    question: "Quais são as formas de pagamento?",
     answer:
       "As condições e formas de pagamento são informadas no orçamento, de acordo com o serviço e a cobertura escolhida.",
   },
@@ -90,9 +73,7 @@ export default function ServicosPage() {
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.container}>
-            <span className={styles.eyebrow}>
-              Serviços
-            </span>
+            <span className={styles.eyebrow}>Serviços</span>
 
             <div className={styles.heroHeading}>
               <h1 className={styles.title}>
@@ -103,8 +84,8 @@ export default function ServicosPage() {
 
               <div className={styles.heroText}>
                 <p>
-                  Mais do que fotografar, quero criar uma
-                  experiência que faça sentido para a sua história.
+                  Mais do que fotografar, procuro criar uma experiência que
+                  faça sentido para a sua história.
                 </p>
 
                 <a
@@ -124,9 +105,7 @@ export default function ServicosPage() {
         <section className={styles.servicesSection}>
           <div className={styles.container}>
             <div className={styles.sectionHeading}>
-              <span className={styles.sectionLabel}>
-                O que eu fotografo
-              </span>
+              <span className={styles.sectionLabel}>O que eu fotografo</span>
 
               <h2>
                 Histórias diferentes,
@@ -137,16 +116,9 @@ export default function ServicosPage() {
 
             <div className={styles.servicesGrid}>
               {services.map((service) => (
-                <article
-                  key={service.number}
-                  className={styles.service}
-                >
-                  <span className={styles.serviceNumber}>
-                    {service.number}
-                  </span>
-
+                <article key={service.number} className={styles.service}>
+                  <span className={styles.serviceNumber}>{service.number}</span>
                   <h3>{service.title}</h3>
-
                   <p>{service.description}</p>
                 </article>
               ))}
@@ -169,34 +141,41 @@ export default function ServicosPage() {
             </div>
 
             <div className={styles.polaroidContent}>
-              <span className={styles.sectionLabel}>
-                Experiência especial
-              </span>
+              <span className={styles.sectionLabel}>Experiência especial</span>
 
               <h2>
-                Cobertura fotográfica
-                <br />
-                com <em>Polaroid</em>
+                Cobertura fotográfica com <em>Polaroid</em> no seu evento!
               </h2>
 
               <p className={styles.polaroidLead}>
-                Além dos registros digitais, seus convidados
-                podem levar uma fotografia impressa como
-                lembrança daquele momento.
+                A fotografia instantânea transforma o registro de momentos em
+                parte da própria experiência do evento.
               </p>
 
               <div className={styles.polaroidText}>
                 <p>
-                  A proposta transforma a fotografia em parte
-                  da experiência do evento: a imagem é feita,
-                  impressa e entregue ali mesmo.
+                  Mais do que fotografar, a proposta é proporcionar aos
+                  convidados a oportunidade de levar para casa uma lembrança
+                  física e especial daquele dia, recebida ali mesmo, durante a
+                  celebração.
                 </p>
 
                 <p>
-                  É uma opção especialmente interessante para
-                  casamentos, aniversários, eventos corporativos
-                  e celebrações que buscam uma lembrança afetiva
-                  e física.
+                  E a experiência não termina com os convidados! Os anfitriões
+                  também podem receber um álbum exclusivo no dia do evento,
+                  reunindo registros especiais e fotografias dos convidados
+                  acompanhadas de dedicatórias escritas por cada um. Uma forma
+                  carinhosa de guardar não apenas as imagens, mas também as
+                  mensagens, os sentimentos e as pessoas que fizeram parte
+                  daquele momento.
+                </p>
+
+                <p>
+                  Seja em casamentos, aniversários, eventos corporativos ou
+                  outras celebrações, a fotografia instantânea acrescenta um
+                  toque de personalidade, interação e afeto. Afinal, os melhores
+                  momentos merecem ser vividos, compartilhados e levados para
+                  além daquele dia.
                 </p>
               </div>
 
@@ -206,22 +185,30 @@ export default function ServicosPage() {
                 rel="noreferrer"
                 className={styles.primaryCta}
               >
-                <span>
-                  Quero solicitar meu orçamento
-                </span>
-
+                <span>Quero solicitar meu orçamento</span>
                 <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
         </section>
 
+        <section
+          className={styles.servicesSection}
+          aria-labelledby="depoimentos-titulo"
+        >
+          <div className={styles.container}>
+            <div className={styles.sectionHeading}>
+              <h2 id="depoimentos-titulo">Depoimentos</h2>
+            </div>
+
+            <TestimonialsCarousel />
+          </div>
+        </section>
+
         <section className={styles.faqSection}>
           <div className={styles.container}>
             <div className={styles.faqHeading}>
-              <span className={styles.sectionLabel}>
-                Dúvidas frequentes
-              </span>
+              <span className={styles.sectionLabel}>Dúvidas frequentes</span>
 
               <h2>
                 Antes de
@@ -239,11 +226,7 @@ export default function ServicosPage() {
                 >
                   <summary>
                     <span>{faq.question}</span>
-
-                    <span
-                      className={styles.faqIcon}
-                      aria-hidden="true"
-                    />
+                    <span className={styles.faqIcon} aria-hidden="true" />
                   </summary>
 
                   <div className={styles.faqAnswer}>
@@ -257,9 +240,7 @@ export default function ServicosPage() {
 
         <section className={styles.finalCta}>
           <div className={styles.container}>
-            <span className={styles.sectionLabel}>
-              Vamos conversar?
-            </span>
+            <span className={styles.sectionLabel}>Vamos conversar?</span>
 
             <h2>
               Sua história merece
@@ -268,8 +249,8 @@ export default function ServicosPage() {
             </h2>
 
             <p>
-              Me conte sobre o que você está planejando e vamos
-              pensar juntas na melhor forma de registrar esse momento.
+              Me conte sobre o que você está planejando e vamos pensar juntas
+              na melhor forma de registrar esse momento.
             </p>
 
             <a
@@ -278,10 +259,7 @@ export default function ServicosPage() {
               rel="noreferrer"
               className={styles.finalButton}
             >
-              <span>
-                Quero solicitar meu orçamento
-              </span>
-
+              <span>Quero solicitar meu orçamento</span>
               <span aria-hidden="true">→</span>
             </a>
           </div>
