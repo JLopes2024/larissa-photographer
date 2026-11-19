@@ -1,0 +1,44 @@
+.button {
+    position: fixed;
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+  
+    background: var(--color-dark, #292521);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+  
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+  }
+  
+  .arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  
+  .button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--color-dark, #292521);
+  }
+  
+  @media (min-width: 701px) {
+    .button {
+      right: 28px;
+      bottom: 28px;
+    }
+  }
