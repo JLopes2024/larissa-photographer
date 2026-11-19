@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Footer from "@/components/layout/Footer";
-import TestimonialsCarousel from "@/app/sobre/TestimonialsCarousel";
 
 import styles from "./page.module.css";
 
@@ -185,25 +184,6 @@ export default function SobrePage() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className={styles.specialties}>
-          <div className={styles.container}>
-            <div className={styles.specialtiesHeader}>
-              <div className={styles.sectionLabel}>
-                <span>03</span>
-                <span>Depoimentos</span>
-              </div>
-
-              <h2 className={styles.specialtiesTitle}>
-                Diferentes histórias.
-                <br />
-                O mesmo cuidado.
-              </h2>
-            </div>
-
-            <TestimonialsCarousel />
           </div>
         </section>
       </main>
