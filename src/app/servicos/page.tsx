@@ -192,19 +192,6 @@ export default function ServicosPage() {
           </div>
         </section>
 
-        <section
-          className={styles.servicesSection}
-          aria-labelledby="depoimentos-titulo"
-        >
-          <div className={styles.container}>
-            <div className={styles.sectionHeading}>
-              <h2 id="depoimentos-titulo">Depoimentos</h2>
-            </div>
-
-            <TestimonialsCarousel />
-          </div>
-        </section>
-
         <section className={styles.faqSection}>
           <div className={styles.container}>
             <div className={styles.faqHeading}>
@@ -235,6 +222,19 @@ export default function ServicosPage() {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section
+          className={styles.servicesSection}
+          aria-labelledby="depoimentos-titulo"
+        >
+          <div className={styles.container}>
+            <div className={styles.sectionHeading}>
+              <h2 id="depoimentos-titulo">Depoimentos</h2>
+            </div>
+
+            <TestimonialsCarousel />
           </div>
         </section>
 
