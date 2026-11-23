@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Footer from "@/components/layout/Footer";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -10,10 +12,55 @@ export const metadata = createPageMetadata({
   path: "/autoral",
 });
 
+const fotosAnaFlavia = [
+  {
+    src: "/images/ensaios/autoral/autoralcapa.jpg",
+    alt: "Retrato de Ana Flávia com blusa branca",
+    width: 1200,
+    height: 1800,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral1.jpg",
+    alt: "Ana Flávia de jaqueta jeans junto a um poste",
+    width: 3456,
+    height: 5184,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral2.jpg",
+    alt: "Ana Flávia com os braços cruzados diante de uma fachada",
+    width: 3456,
+    height: 5184,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral3.jpg",
+    alt: "Ana Flávia de vestido branco ao lado de um poste",
+    width: 3456,
+    height: 5184,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral4.jpg",
+    alt: "Retrato de Ana Flávia em frente a uma porta escura",
+    width: 3456,
+    height: 5184,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral5.jpg",
+    alt: "Ana Flávia de perfil com prédios ao fundo",
+    width: 1200,
+    height: 1800,
+  },
+  {
+    src: "/images/ensaios/autoral/autoral6.jpg",
+    alt: "Ana Flávia diante de uma entrada em arco",
+    width: 1200,
+    height: 1800,
+  },
+];
+
 const projetos = [
   {
     id: "ana-flavia",
-    titulo: "Ensaio com Ana Flávia",
+    titulo: "Ensaio com a Ana Flávia",
     paragrafos: [
       "", // Como surgiu a ideia do ensaio?
       "", // Como foi fotografar a Ana Flávia?
@@ -34,16 +81,16 @@ const festivais = [
   {
     id: "fau-fest",
     titulo: "FAU FEST",
-    ano: "", // FAU FEST: preencher o ano da participação.
-    participacao: "", // FAU FEST: escrever como a Larissa participou.
-    relato: "", // FAU FEST: contar a experiência nas palavras da Larissa.
+    ano: "", // Preencher o ano da participação.
+    participacao: "", // Escrever como a Larissa participou.
+    relato: "", // Contar a experiência nas palavras da Larissa.
   },
   {
     id: "tiradentes",
     titulo: "15º Festival de Fotografia de Tiradentes",
     ano: "2026",
-    participacao: "", // Preencher com o tipo de participação.
-    relato: "", // Incluir o relato da Larissa sobre o festival.
+    participacao: "",
+    relato: "",
   },
 ];
 
@@ -64,7 +111,7 @@ export default function AutoralPage() {
             </h2>
 
             {projetos.map((projeto) => (
-              <article key={projeto.id} className={styles.entry}>
+              <article id={projeto.id} key={projeto.id} className={styles.entry}>
                 <h3 className={styles.entryTitle}>{projeto.titulo}</h3>
 
                 {projeto.paragrafos.some((texto) => texto.trim()) && (
@@ -72,6 +119,21 @@ export default function AutoralPage() {
                     {projeto.paragrafos.map((texto, indice) =>
                       texto.trim() ? <p key={indice}>{texto}</p> : null
                     )}
+                  </div>
+                )}
+
+                {projeto.id === "ana-flavia" && (
+                  <div className={styles.gallery}>
+                    {fotosAnaFlavia.map((foto) => (
+                      <Image
+                        key={foto.src}
+                        src={foto.src}
+                        alt={foto.alt}
+                        width={foto.width}
+                        height={foto.height}
+                        sizes="(max-width: 700px) 100vw, 33vw"
+                      />
+                    ))}
                   </div>
                 )}
               </article>
