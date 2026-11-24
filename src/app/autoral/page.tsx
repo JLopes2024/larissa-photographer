@@ -39,13 +39,6 @@ const festivais = [
     participacao: "", // Como a Larissa participou do FAU FEST?
     relato: "", // Relato da Larissa sobre o festival.
   },
-  {
-    id: "tiradentes",
-    titulo: "15º Festival de Fotografia de Tiradentes",
-    ano: "2026",
-    participacao: "",
-    relato: "",
-  },
 ];
 
 const premiacoes = [
