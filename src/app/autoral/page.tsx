@@ -1,7 +1,11 @@
+import { readdir } from "node:fs/promises";
+import path from "node:path";
+
 import Footer from "@/components/layout/Footer";
 import { createPageMetadata } from "@/lib/seo";
 
 import AnaFlaviaCarousel from "./AnaFlaviaCarousel";
+import FotoCarousel from "./FotoCarousel";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
@@ -31,23 +35,48 @@ const projetos = [
   },
 ];
 
-const festivais = [
+type Galeria = {
+  pasta: string;
+  nomeArquivo: RegExp;
+  formato: "vertical" | "horizontal";
+};
+
+type Entrada = {
+  id: string;
+  titulo: string;
+  ano: string;
+  participacao: string;
+  relato: string;
+  galeria: Galeria;
+};
+
+const festivais: Entrada[] = [
   {
     id: "fau-fest",
     titulo: "FAU FEST",
     ano: "2026",
     participacao: "", // Como a Larissa participou do FAU FEST?
     relato: "", // Relato da Larissa sobre o festival.
+    galeria: {
+      pasta: "faufest",
+      nomeArquivo: /^FAUFEST\d+\.(?:jpe?g|png|webp|avif)$/i,
+      formato: "vertical",
+    },
   },
 ];
 
-const premiacoes = [
+const premiacoes: Entrada[] = [
   {
     id: "tiradentes",
     titulo: "15º Festival de Fotografia de Tiradentes",
     ano: "2026",
     participacao: "", // Nome do prêmio ou reconhecimento recebido.
     relato: "", // Relato sobre o trabalho premiado.
+    galeria: {
+      pasta: "festival-tiradentes",
+      nomeArquivo: /^FESTIVALTIRADENTES\d+\.(?:jpe?g|png|webp|avif)$/i,
+      formato: "horizontal",
+    },
   },
 ];
 
@@ -55,6 +84,39 @@ const secoes = [
   { id: "festivais", titulo: "Festivais", itens: festivais },
   { id: "premiacoes", titulo: "Premiações", itens: premiacoes },
 ];
+
+async function GaleriaDaEntrada({ entrada }: { entrada: Entrada }) {
+  const { galeria, titulo } = entrada;
+
+  const diretorio = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "festivais",
+    galeria.pasta
+  );
+
+  const arquivos = await readdir(diretorio, { withFileTypes: true });
+
+  const fotos = arquivos
+    .filter(
+      (arquivo) => arquivo.isFile() && galeria.nomeArquivo.test(arquivo.name)
+    )
+    .map((arquivo) => arquivo.name)
+    .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true }))
+    .map((nome, indice) => ({
+      src: `/images/festivais/${galeria.pasta}/${nome}`,
+      alt: `${titulo}, fotografia ${indice + 1}`,
+    }));
+
+  return (
+    <FotoCarousel
+      titulo={titulo}
+      fotos={fotos}
+      formato={galeria.formato}
+    />
+  );
+}
 
 export default function AutoralPage() {
   return (
@@ -134,6 +196,8 @@ export default function AutoralPage() {
                       {item.relato && <p>{item.relato}</p>}
                     </div>
                   )}
+
+                  <GaleriaDaEntrada entrada={item} />
                 </div>
               ))}
             </div>
