@@ -1,8 +1,7 @@
-import Image from "next/image";
-
 import Footer from "@/components/layout/Footer";
 import { createPageMetadata } from "@/lib/seo";
 
+import AnaFlaviaCarousel from "./AnaFlaviaCarousel";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
@@ -11,51 +10,6 @@ export const metadata = createPageMetadata({
     "Conheça os projetos autorais de Larissa Photographer e suas participações em festivais de fotografia.",
   path: "/autoral",
 });
-
-const fotosAnaFlavia = [
-  {
-    src: "/images/ensaios/autoral/autoralcapa.jpg",
-    alt: "Retrato de Ana Flávia com blusa branca",
-    width: 1200,
-    height: 1800,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral1.jpg",
-    alt: "Ana Flávia de jaqueta jeans junto a um poste",
-    width: 3456,
-    height: 5184,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral2.jpg",
-    alt: "Ana Flávia com os braços cruzados diante de uma fachada",
-    width: 3456,
-    height: 5184,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral3.jpg",
-    alt: "Ana Flávia de vestido branco ao lado de um poste",
-    width: 3456,
-    height: 5184,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral4.jpg",
-    alt: "Retrato de Ana Flávia em frente a uma porta escura",
-    width: 3456,
-    height: 5184,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral5.jpg",
-    alt: "Ana Flávia de perfil com prédios ao fundo",
-    width: 1200,
-    height: 1800,
-  },
-  {
-    src: "/images/ensaios/autoral/autoral6.jpg",
-    alt: "Ana Flávia diante de uma entrada em arco",
-    width: 1200,
-    height: 1800,
-  },
-];
 
 const projetos = [
   {
@@ -81,9 +35,9 @@ const festivais = [
   {
     id: "fau-fest",
     titulo: "FAU FEST",
-    ano: "", // Preencher o ano da participação.
-    participacao: "", // Escrever como a Larissa participou.
-    relato: "", // Contar a experiência nas palavras da Larissa.
+    ano: "2026",
+    participacao: "", // Como a Larissa participou do FAU FEST?
+    relato: "", // Relato da Larissa sobre o festival.
   },
   {
     id: "tiradentes",
@@ -92,6 +46,21 @@ const festivais = [
     participacao: "",
     relato: "",
   },
+];
+
+const premiacoes = [
+  {
+    id: "tiradentes",
+    titulo: "15º Festival de Fotografia de Tiradentes",
+    ano: "2026",
+    participacao: "", // Nome do prêmio ou reconhecimento recebido.
+    relato: "", // Relato sobre o trabalho premiado.
+  },
+];
+
+const secoes = [
+  { id: "festivais", titulo: "Festivais", itens: festivais },
+  { id: "premiacoes", titulo: "Premiações", itens: premiacoes },
 ];
 
 export default function AutoralPage() {
@@ -111,7 +80,11 @@ export default function AutoralPage() {
             </h2>
 
             {projetos.map((projeto) => (
-              <article id={projeto.id} key={projeto.id} className={styles.entry}>
+              <article
+                id={projeto.id}
+                key={projeto.id}
+                className={styles.entry}
+              >
                 <h3 className={styles.entryTitle}>{projeto.titulo}</h3>
 
                 {projeto.paragrafos.some((texto) => texto.trim()) && (
@@ -122,56 +95,57 @@ export default function AutoralPage() {
                   </div>
                 )}
 
-                {projeto.id === "ana-flavia" && (
-                  <div className={styles.gallery}>
-                    {fotosAnaFlavia.map((foto) => (
-                      <Image
-                        key={foto.src}
-                        src={foto.src}
-                        alt={foto.alt}
-                        width={foto.width}
-                        height={foto.height}
-                        sizes="(max-width: 700px) 100vw, 33vw"
-                      />
-                    ))}
-                  </div>
-                )}
+                {projeto.id === "ana-flavia" && <AnaFlaviaCarousel />}
               </article>
             ))}
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby="titulo-festivais">
-          <div className={styles.container}>
-            <h2 id="titulo-festivais" className={styles.sectionTitle}>
-              Festivais
-            </h2>
-
-            {festivais.map((festival) => (
-              <article key={festival.id} className={styles.entry}>
-                <div>
-                  {festival.ano && (
-                    <p className={styles.year}>{festival.ano}</p>
-                  )}
-
-                  <h3 className={styles.entryTitle}>{festival.titulo}</h3>
-                </div>
-
-                {(festival.participacao || festival.relato) && (
-                  <div className={styles.copy}>
-                    {festival.participacao && (
-                      <p className={styles.participation}>
-                        {festival.participacao}
-                      </p>
+        {secoes.map((secao) => (
+          <section
+            key={secao.id}
+            className={styles.section}
+            aria-labelledby={`titulo-${secao.id}`}
+          >
+            <div className={styles.container}>
+              {secao.itens.map((item, indice) => (
+                <div key={item.id} className={styles.entry}>
+                  <div>
+                    {indice === 0 && (
+                      <h2
+                        id={`titulo-${secao.id}`}
+                        className={`${styles.sectionTitle} ${styles.awardLabel}`}
+                      >
+                        {secao.titulo}
+                      </h2>
                     )}
 
-                    {festival.relato && <p>{festival.relato}</p>}
+                    <h3 className={styles.entryTitle}>
+                      {item.titulo}
+                      {item.ano && (
+                        <span className={styles.inlineYear}>
+                          {"\u00A0"}({item.ano})
+                        </span>
+                      )}
+                    </h3>
                   </div>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
+
+                  {(item.participacao || item.relato) && (
+                    <div className={styles.copy}>
+                      {item.participacao && (
+                        <p className={styles.participation}>
+                          {item.participacao}
+                        </p>
+                      )}
+
+                      {item.relato && <p>{item.relato}</p>}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
 
       <Footer />
