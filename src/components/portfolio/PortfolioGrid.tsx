@@ -1,11 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import {
   portfolioCategories,
@@ -15,329 +12,311 @@ import {
   type PortfolioCollection,
 } from "@/data/portfolio";
 
-import styles from "./PortfolioGrid.module.css";
+export type ActiveCategory = PortfolioCategory | "todos";
+export type ActiveCollection = PortfolioCollection | "todos";
 
-export type ActiveCategory =
-  | "todos"
-  | PortfolioCategory;
+function galleryUrl(
+  category: ActiveCategory,
+  collection?: PortfolioCollection
+) {
+  const params = new URLSearchParams();
 
-export type ActiveCollection =
-  | "todos"
-  | PortfolioCollection;
+  if (category !== "todos") params.set("categoria", category);
+  if (collection) params.set("colecao", collection);
 
-type PortfolioGridProps = {
-  activeCategory: ActiveCategory;
-  activeCollection: ActiveCollection;
+  const query = params.toString();
 
-  onCategoryChange: (
-    category: ActiveCategory
-  ) => void;
+  return `/portfolio${query ? `?${query}` : ""}#explore-portfolio`;
+}
 
-  onCollectionChange: (
-    collection: ActiveCollection
-  ) => void;
-};
+const albums = portfolioCategories.flatMap(({ value }) => {
+  if (value === "todos") return [];
 
-const INITIAL_ITEMS = 12;
-const ITEMS_PER_LOAD = 12;
+  const collections =
+    value === "profissional"
+      ? [{ label: "Profissional", value: "profissional" as const }]
+      : portfolioCollections[value] ?? [];
+
+  return collections.map((collection) => {
+    const photos = portfolioItems
+      .filter(
+        (photo) =>
+          photo.collection === collection.value &&
+          photo.src !== "/images/religiosos/batizado/batizadocapa.jpg"
+      )
+      .map((photo) => {
+        // Dimensões conferidas nas imagens do catálogo original.
+        if (photo.src.endsWith("/batizado2.jpg")) {
+          return { ...photo, width: 1200, height: 1573 };
+        }
+
+        if (photo.src.endsWith("/batizado3.jpg")) {
+          return { ...photo, width: 1365, height: 2048 };
+        }
+
+        return photo;
+      });
+
+    if (value === "religiosos") {
+      photos.sort(
+        (a, b) =>
+          Number(Boolean(b.cover)) - Number(Boolean(a.cover)) ||
+          a.src.localeCompare(b.src, "pt-BR", { numeric: true })
+      );
+    }
+
+    const rows = [];
+
+    for (let index = 0; index < photos.length; index += 2) {
+      rows.push(photos.slice(index, index + 2));
+    }
+
+    return {
+      ...collection,
+      category: value,
+      rows,
+      photos,
+      cover: photos.find((photo) => photo.cover) ?? photos[0],
+    };
+  });
+});
 
 export default function PortfolioGrid({
   activeCategory,
   activeCollection,
   onCategoryChange,
-  onCollectionChange,
-}: PortfolioGridProps) {
-  const [visibleCount, setVisibleCount] =
-    useState(INITIAL_ITEMS);
+}: {
+  activeCategory: ActiveCategory;
+  activeCollection: ActiveCollection;
+  onCategoryChange?: (category: ActiveCategory) => void;
+  onCollectionChange?: (collection: ActiveCollection) => void;
+}) {
+  const collection = useSearchParams().get("colecao") ?? activeCollection;
 
-  const [failedImages, setFailedImages] =
-    useState<number[]>([]);
+  const parentShowsBack =
+    Boolean(onCategoryChange) && activeCollection !== "todos";
 
-  useEffect(() => {
-    setVisibleCount(INITIAL_ITEMS);
-  }, [
-    activeCategory,
-    activeCollection,
-  ]);
+  const album = albums.find(
+    (item) => item.category === activeCategory && item.value === collection
+  );
 
-  const currentCollections =
-    activeCategory === "todos"
-      ? []
-      : portfolioCollections[
-          activeCategory
-        ] ?? [];
+  const visible = albums.filter(
+    (item) => activeCategory === "todos" || item.category === activeCategory
+  );
 
-  const filteredItems = useMemo(() => {
-    let items = portfolioItems.filter(
-      (item) =>
-        !failedImages.includes(
-          item.id
-        )
-    );
-
-    if (
-      activeCategory !== "todos"
-    ) {
-      items = items.filter(
-        (item) =>
-          item.category ===
-          activeCategory
-      );
-    }
-
-    if (
-      activeCollection !== "todos"
-    ) {
-      items = items.filter(
-        (item) =>
-          item.collection ===
-          activeCollection
-      );
-    }
-
-    return items;
-  }, [
-    activeCategory,
-    activeCollection,
-    failedImages,
-  ]);
-
-  const visibleItems =
-    filteredItems.slice(
-      0,
-      visibleCount
-    );
-
-  const hasMore =
-    visibleCount <
-    filteredItems.length;
-
-  function handleCategoryChange(
-    category: ActiveCategory
-  ) {
-    onCategoryChange(category);
-  }
-
-  function handleCollectionChange(
-    collection: ActiveCollection
-  ) {
-    onCollectionChange(collection);
-  }
-
-  function handleLoadMore() {
-    setVisibleCount((current) =>
-      Math.min(
-        current +
-          ITEMS_PER_LOAD,
-        filteredItems.length
-      )
-    );
-  }
-
-  function handleImageError(
-    id: number
-  ) {
-    setFailedImages(
-      (current) => {
-        if (
-          current.includes(id)
-        ) {
-          return current;
-        }
-
-        return [
-          ...current,
-          id,
-        ];
-      }
-    );
-  }
+  const categoryLabel = portfolioCategories.find(
+    (category) => category.value === activeCategory
+  )?.label;
 
   return (
-    <div className={styles.wrapper}>
-      <div
-        className={
-          styles.filterArea
-        }
-      >
-        <div
-          className={styles.filters}
-          aria-label="Filtrar portfólio por categoria"
-        >
-          {portfolioCategories.map(
-            (category) => {
-              const isActive =
-                activeCategory ===
-                category.value;
-
-              return (
-                <button
-                  key={
-                    category.value
-                  }
-                  type="button"
-                  className={`${styles.filterButton} ${
-                    isActive
-                      ? styles.active
-                      : ""
-                  }`}
-                  aria-pressed={
-                    isActive
-                  }
-                  onClick={() =>
-                    handleCategoryChange(
-                      category.value
-                    )
-                  }
-                >
-                  {category.label}
-                </button>
-              );
-            }
-          )}
-        </div>
-
-        {currentCollections.length >
-          0 && (
-          <div
-            className={
-              styles.subfilters
-            }
-            aria-label={`Filtrar ${
-              activeCategory ===
-              "ensaios"
-                ? "ensaios"
-                : "religiosos"
-            } por tipo`}
+    <>
+      <nav aria-label="Categorias do portfólio" className="portfolio-filters">
+        {portfolioCategories.map(({ label, value }) => (
+          <Link
+            key={value}
+            href={galleryUrl(value)}
+            aria-current={activeCategory === value ? "true" : undefined}
           >
+            {label}
+          </Link>
+        ))}
+      </nav>
 
-            {currentCollections.map(
-              (collection) => {
-                const isActive =
-                  activeCollection ===
-                  collection.value;
+      {album ? (
+        <section aria-labelledby="album-title">
+          {!parentShowsBack && (
+            <Link className="portfolio-back" href={galleryUrl(activeCategory)}>
+              ← Álbuns de {categoryLabel}
+            </Link>
+          )}
 
-                return (
-                  <button
-                    key={
-                      collection.value
-                    }
-                    type="button"
-                    className={`${styles.subfilterButton} ${
-                      isActive
-                        ? styles.subfilterActive
-                        : ""
-                    }`}
-                    aria-pressed={
-                      isActive
-                    }
-                    onClick={() =>
-                      handleCollectionChange(
-                        collection.value
-                      )
-                    }
+          <h3 id="album-title" className="portfolio-title">
+            {album.label}
+          </h3>
+
+          <p className="portfolio-count">{album.photos.length} fotografias</p>
+
+          <div className="portfolio-photos">
+            {album.rows.map((row) => (
+              <div key={row[0].id} className="portfolio-photoRow">
+                {row.map((photo) => (
+                  <figure
+                    key={photo.id}
+                    style={{ flexGrow: photo.width / photo.height }}
                   >
-                    {
-                      collection.label
-                    }
-                  </button>
-                );
-              }
-            )}
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      sizes="(max-width: 700px) 100vw, (max-width: 1350px) 72vw, 920px"
+                    />
+                  </figure>
+                ))}
+              </div>
+            ))}
           </div>
-        )}
-      </div>
-
-      <div
-        className={styles.resultMeta}
-        aria-live="polite"
-      >
-        <span>
-          {filteredItems.length}
-        </span>
-
-        <span>
-          {filteredItems.length === 1
-            ? "fotografia"
-            : "fotografias"}
-        </span>
-      </div>
-
-      {visibleItems.length > 0 ? (
-        <div className={styles.grid}>
-          {visibleItems.map(
-            (item) => (
-              <figure
-                key={item.id}
-                className={
-                  styles.item
-                }
-              >
-                <div
-                  className={
-                    styles.imageWrapper
-                  }
-                >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    width={item.width}
-                    height={
-                      item.height
-                    }
-                    sizes="
-                      (max-width: 700px) 50vw,
-                      50vw
-                    "
-                    className={
-                      styles.image
-                    }
-                    onError={() =>
-                      handleImageError(
-                        item.id
-                      )
-                    }
-                  />
-                </div>
-              </figure>
-            )
-          )}
-        </div>
+        </section>
       ) : (
-        <div className={styles.empty}>
-          <p>
-            Nenhuma fotografia
-            disponível nesta
-            categoria.
-          </p>
-        </div>
+        <ul className="portfolio-albums">
+          {visible.map(
+            ({ value, category, label, cover, photos }) =>
+              cover && (
+                <li key={value}>
+                  <Link
+                    className="portfolio-card"
+                    href={galleryUrl(category, value)}
+                  >
+                    <div className="portfolio-cover">
+                      <Image
+                        src={cover.src}
+                        alt=""
+                        fill
+                        sizes="(max-width: 700px) 100vw, (max-width: 1350px) 50vw, 630px"
+                      />
+                    </div>
+
+                    <div className="portfolio-caption">
+                      <h3 className="portfolio-title">{label}</h3>
+                      <span className="portfolio-count">
+                        {photos.length} fotos <span aria-hidden="true">↗</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              )
+          )}
+        </ul>
       )}
 
-      {hasMore && (
-        <div
-          className={
-            styles.loadMoreWrapper
+      <style jsx global>{`
+        .portfolio-filters {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0 1.4rem;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .portfolio-filters a,
+        .portfolio-back {
+          display: inline-block;
+          padding: 0.8rem 0;
+          color: var(--color-muted);
+        }
+
+        .portfolio-filters a[aria-current],
+        .portfolio-filters a:hover,
+        .portfolio-back:hover {
+          color: var(--color-primary);
+          text-decoration: underline;
+          text-underline-offset: 0.4em;
+        }
+
+        .portfolio-albums {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          align-items: start;
+          gap: clamp(1.25rem, 3vw, 3rem);
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
+        .portfolio-card {
+          display: block;
+        }
+
+        .portfolio-card:hover .portfolio-title {
+          color: var(--color-primary);
+        }
+
+        .portfolio-cover {
+          position: relative;
+          aspect-ratio: 4 / 3;
+          background: var(--color-secondary);
+        }
+
+        .portfolio-cover img {
+          object-fit: cover;
+          object-position: center 38%;
+        }
+
+        .portfolio-caption {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 0.85rem 0;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .portfolio-title {
+          font-family: var(--font-editorial), Georgia, serif;
+          font-size: clamp(1.8rem, 4vw, 3rem);
+          line-height: 1.05;
+        }
+
+        .portfolio-count {
+          color: var(--color-muted);
+          font-size: 0.85rem;
+        }
+
+        .portfolio-photos {
+          --photo-gap: clamp(8px, 1.2vw, 18px);
+          display: grid;
+          gap: var(--photo-gap);
+          margin-top: 1.5rem;
+        }
+
+        .portfolio-photoRow {
+          display: flex;
+          gap: var(--photo-gap);
+        }
+
+        .portfolio-photoRow figure {
+          flex-basis: 0;
+          min-width: 0;
+          margin: 0;
+        }
+
+        .portfolio-photoRow figure:only-child {
+          max-width: 70%;
+          margin-inline: auto;
+        }
+
+        .portfolio-photos img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .portfolio-filters a:focus-visible,
+        .portfolio-back:focus-visible,
+        .portfolio-card:focus-visible {
+          outline: 2px solid var(--color-primary);
+          outline-offset: 3px;
+        }
+
+        @media (max-width: 700px) {
+          .portfolio-albums {
+            grid-template-columns: 1fr;
           }
-        >
-          <button
-            type="button"
-            className={
-              styles.loadMore
-            }
-            onClick={
-              handleLoadMore
-            }
-          >
-            <span>
-              Ver mais fotografias
-            </span>
 
-            <span aria-hidden="true">
-              ↓
-            </span>
-          </button>
-        </div>
-      )}
-    </div>
+          .portfolio-photoRow {
+            flex-direction: column;
+          }
+
+          .portfolio-photoRow figure {
+            flex-basis: auto;
+          }
+
+          .portfolio-photoRow figure:only-child {
+            max-width: 100%;
+            margin: 0;
+          }
+        }
+      `}</style>
+    </>
   );
 }
